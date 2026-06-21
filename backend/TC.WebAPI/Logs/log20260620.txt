@@ -1,0 +1,233 @@
+2026-06-20 22:10:08.553 +05:30 [INF] No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts
+2026-06-20 22:10:08.782 +05:30 [INF] Now listening on: https://localhost:7298
+2026-06-20 22:10:08.784 +05:30 [INF] Now listening on: http://localhost:5136
+2026-06-20 22:10:08.786 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2026-06-20 22:10:08.786 +05:30 [INF] Hosting environment: Development
+2026-06-20 22:10:08.786 +05:30 [INF] Content root path: C:\Users\parir\source\repos\TrelloClone\backend\TC.WebAPI
+2026-06-20 22:10:30.996 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5136/ - null null
+2026-06-20 22:10:31.078 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5136/ - 307 null null 83.5912ms
+2026-06-20 22:10:31.175 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7298/ - null null
+2026-06-20 22:10:31.190 +05:30 [INF] HTTP GET / responded 404 in 8.6605 ms
+2026-06-20 22:10:31.196 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7298/ - 404 null null 20.1542ms
+2026-06-20 22:10:31.199 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7298/, Response status code: 404
+2026-06-20 22:11:14.777 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7298/api/weatherforecast - null null
+2026-06-20 22:11:14.778 +05:30 [INF] HTTP GET /api/weatherforecast responded 404 in 0.2224 ms
+2026-06-20 22:11:14.778 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7298/api/weatherforecast - 404 null null 0.7796ms
+2026-06-20 22:11:14.778 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7298/api/weatherforecast, Response status code: 404
+2026-06-20 22:11:17.706 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7298/api/weatherforecast - null null
+2026-06-20 22:11:17.707 +05:30 [INF] HTTP GET /api/weatherforecast responded 404 in 1.0742 ms
+2026-06-20 22:11:17.707 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7298/api/weatherforecast - 404 null null 1.5047ms
+2026-06-20 22:11:17.707 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7298/api/weatherforecast, Response status code: 404
+2026-06-20 22:12:51.578 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7298/api/GetWeatherForecast - null null
+2026-06-20 22:12:51.579 +05:30 [INF] HTTP GET /api/GetWeatherForecast responded 404 in 0.0711 ms
+2026-06-20 22:12:51.579 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7298/api/GetWeatherForecast - 404 null null 0.583ms
+2026-06-20 22:12:51.579 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7298/api/GetWeatherForecast, Response status code: 404
+2026-06-20 22:15:13.019 +05:30 [INF] Now listening on: https://localhost:7298
+2026-06-20 22:15:13.053 +05:30 [INF] Now listening on: http://localhost:5136
+2026-06-20 22:15:13.055 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2026-06-20 22:15:13.055 +05:30 [INF] Hosting environment: Development
+2026-06-20 22:15:13.055 +05:30 [INF] Content root path: C:\Users\parir\source\repos\TrelloClone\backend\TC.WebAPI
+2026-06-20 22:15:16.560 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7298/api/GetWeatherForecast - null null
+2026-06-20 22:15:16.592 +05:30 [INF] HTTP GET /api/GetWeatherForecast responded 404 in 5.6222 ms
+2026-06-20 22:15:16.596 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7298/api/GetWeatherForecast - 404 null null 37.2068ms
+2026-06-20 22:15:16.598 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7298/api/GetWeatherForecast, Response status code: 404
+2026-06-20 22:15:21.263 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7298/ - null null
+2026-06-20 22:15:21.264 +05:30 [INF] HTTP GET / responded 404 in 0.2206 ms
+2026-06-20 22:15:21.264 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7298/ - 404 null null 1.4576ms
+2026-06-20 22:15:21.264 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7298/, Response status code: 404
+2026-06-20 22:15:59.968 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7298/weatherforecast - null null
+2026-06-20 22:15:59.973 +05:30 [INF] Executing endpoint 'TC.WebAPI.Controllers.WeatherForecastController.Get (TC.WebAPI)'
+2026-06-20 22:16:00.002 +05:30 [INF] Route matched with {action = "Get", controller = "WeatherForecast"}. Executing controller action with signature System.Collections.Generic.IEnumerable`1[System.String] Get() on controller TC.WebAPI.Controllers.WeatherForecastController (TC.WebAPI).
+2026-06-20 22:16:00.013 +05:30 [INF] Executing ObjectResult, writing value of type 'System.String[]'.
+2026-06-20 22:16:00.042 +05:30 [INF] Executed action TC.WebAPI.Controllers.WeatherForecastController.Get (TC.WebAPI) in 35.6971ms
+2026-06-20 22:16:00.042 +05:30 [INF] Executed endpoint 'TC.WebAPI.Controllers.WeatherForecastController.Get (TC.WebAPI)'
+2026-06-20 22:16:00.042 +05:30 [INF] HTTP GET /weatherforecast responded 200 in 71.5655 ms
+2026-06-20 22:16:00.042 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7298/weatherforecast - 200 null application/json; charset=utf-8 73.9198ms
+2026-06-20 22:16:00.094 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7298/favicon.ico - null null
+2026-06-20 22:16:00.095 +05:30 [INF] HTTP GET /favicon.ico responded 404 in 0.0807 ms
+2026-06-20 22:16:00.095 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7298/favicon.ico - 404 0 null 0.98ms
+2026-06-20 22:16:00.096 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7298/favicon.ico, Response status code: 404
+2026-06-20 22:17:43.772 +05:30 [INF] Now listening on: https://localhost:7298
+2026-06-20 22:17:43.804 +05:30 [INF] Now listening on: http://localhost:5136
+2026-06-20 22:17:43.806 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2026-06-20 22:17:43.806 +05:30 [INF] Hosting environment: Development
+2026-06-20 22:17:43.806 +05:30 [INF] Content root path: C:\Users\parir\source\repos\TrelloClone\backend\TC.WebAPI
+2026-06-20 22:17:59.389 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7298/api/get-forecasts - null null
+2026-06-20 22:17:59.422 +05:30 [INF] HTTP GET /api/get-forecasts responded 404 in 5.2081 ms
+2026-06-20 22:17:59.426 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7298/api/get-forecasts - 404 null null 39.1135ms
+2026-06-20 22:17:59.428 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7298/api/get-forecasts, Response status code: 404
+2026-06-20 22:18:51.555 +05:30 [INF] Now listening on: https://localhost:7298
+2026-06-20 22:18:51.588 +05:30 [INF] Now listening on: http://localhost:5136
+2026-06-20 22:18:51.590 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2026-06-20 22:18:51.590 +05:30 [INF] Hosting environment: Development
+2026-06-20 22:18:51.590 +05:30 [INF] Content root path: C:\Users\parir\source\repos\TrelloClone\backend\TC.WebAPI
+2026-06-20 22:18:54.213 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7298/api/get-forecasts - null null
+2026-06-20 22:18:54.242 +05:30 [INF] HTTP GET /api/get-forecasts responded 404 in 5.0469 ms
+2026-06-20 22:18:54.246 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7298/api/get-forecasts - 404 null null 34.3969ms
+2026-06-20 22:18:54.248 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7298/api/get-forecasts, Response status code: 404
+2026-06-20 22:18:55.012 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7298/api/get-forecasts - null null
+2026-06-20 22:18:55.013 +05:30 [INF] HTTP GET /api/get-forecasts responded 404 in 0.2885 ms
+2026-06-20 22:18:55.014 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7298/api/get-forecasts - 404 null null 1.7456ms
+2026-06-20 22:18:55.014 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7298/api/get-forecasts, Response status code: 404
+2026-06-20 22:19:12.263 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7298/api/get-forecasts - null null
+2026-06-20 22:19:12.265 +05:30 [INF] HTTP GET /api/get-forecasts responded 404 in 1.0617 ms
+2026-06-20 22:19:12.265 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7298/api/get-forecasts - 404 null null 1.4575ms
+2026-06-20 22:19:12.265 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7298/api/get-forecasts, Response status code: 404
+2026-06-20 22:20:09.035 +05:30 [INF] Now listening on: https://localhost:7298
+2026-06-20 22:20:09.069 +05:30 [INF] Now listening on: http://localhost:5136
+2026-06-20 22:20:09.071 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2026-06-20 22:20:09.071 +05:30 [INF] Hosting environment: Development
+2026-06-20 22:20:09.071 +05:30 [INF] Content root path: C:\Users\parir\source\repos\TrelloClone\backend\TC.WebAPI
+2026-06-20 22:20:14.360 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7298/api/get-forecasts - null null
+2026-06-20 22:20:14.391 +05:30 [INF] HTTP GET /api/get-forecasts responded 404 in 5.7668 ms
+2026-06-20 22:20:14.396 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7298/api/get-forecasts - 404 null null 36.9104ms
+2026-06-20 22:20:14.398 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7298/api/get-forecasts, Response status code: 404
+2026-06-20 22:20:15.206 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7298/api/get-forecasts - null null
+2026-06-20 22:20:15.208 +05:30 [INF] HTTP GET /api/get-forecasts responded 404 in 0.3487 ms
+2026-06-20 22:20:15.208 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7298/api/get-forecasts - 404 null null 1.9042ms
+2026-06-20 22:20:15.208 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7298/api/get-forecasts, Response status code: 404
+2026-06-20 22:20:15.802 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7298/api/get-forecasts - null null
+2026-06-20 22:20:15.804 +05:30 [INF] HTTP GET /api/get-forecasts responded 404 in 1.0576 ms
+2026-06-20 22:20:15.804 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7298/api/get-forecasts - 404 null null 1.5147ms
+2026-06-20 22:20:15.804 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7298/api/get-forecasts, Response status code: 404
+2026-06-20 22:21:00.518 +05:30 [INF] Now listening on: https://localhost:7298
+2026-06-20 22:21:00.547 +05:30 [INF] Now listening on: http://localhost:5136
+2026-06-20 22:21:00.548 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2026-06-20 22:21:00.548 +05:30 [INF] Hosting environment: Development
+2026-06-20 22:21:00.548 +05:30 [INF] Content root path: C:\Users\parir\source\repos\TrelloClone\backend\TC.WebAPI
+2026-06-20 22:21:00.656 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7298/api/get-forecasts - null null
+2026-06-20 22:21:00.686 +05:30 [INF] HTTP GET /api/get-forecasts responded 404 in 4.9566 ms
+2026-06-20 22:21:00.690 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7298/api/get-forecasts - 404 null null 34.7961ms
+2026-06-20 22:21:00.692 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7298/api/get-forecasts, Response status code: 404
+2026-06-20 22:21:10.247 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7298/api/get-forecasts - null null
+2026-06-20 22:21:10.248 +05:30 [INF] HTTP GET /api/get-forecasts responded 404 in 0.3271 ms
+2026-06-20 22:21:10.249 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7298/api/get-forecasts - 404 null null 1.7191ms
+2026-06-20 22:21:10.249 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7298/api/get-forecasts, Response status code: 404
+2026-06-20 22:26:33.399 +05:30 [INF] Now listening on: https://localhost:7298
+2026-06-20 22:26:33.448 +05:30 [INF] Now listening on: http://localhost:5136
+2026-06-20 22:26:33.449 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2026-06-20 22:26:33.450 +05:30 [INF] Hosting environment: Development
+2026-06-20 22:26:33.450 +05:30 [INF] Content root path: C:\Users\parir\source\repos\TrelloClone\backend\TC.WebAPI
+2026-06-20 22:26:34.583 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7298/api/get-forecasts - null null
+2026-06-20 22:26:34.621 +05:30 [INF] HTTP GET /api/get-forecasts responded 404 in 7.0555 ms
+2026-06-20 22:26:34.627 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7298/api/get-forecasts - 404 null null 45.3071ms
+2026-06-20 22:26:34.630 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7298/api/get-forecasts, Response status code: 404
+2026-06-20 22:26:43.067 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7298/ - null null
+2026-06-20 22:26:43.068 +05:30 [INF] HTTP GET / responded 404 in 0.6049 ms
+2026-06-20 22:26:43.069 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7298/ - 404 null null 2.1699ms
+2026-06-20 22:26:43.070 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7298/, Response status code: 404
+2026-06-20 22:26:48.176 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7298/api - null null
+2026-06-20 22:26:48.178 +05:30 [INF] HTTP GET /api responded 404 in 1.2073 ms
+2026-06-20 22:26:48.179 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7298/api - 404 null null 2.6057ms
+2026-06-20 22:26:48.179 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7298/api, Response status code: 404
+2026-06-20 22:27:30.340 +05:30 [INF] Now listening on: https://localhost:7298
+2026-06-20 22:27:30.372 +05:30 [INF] Now listening on: http://localhost:5136
+2026-06-20 22:27:30.374 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2026-06-20 22:27:30.374 +05:30 [INF] Hosting environment: Development
+2026-06-20 22:27:30.374 +05:30 [INF] Content root path: C:\Users\parir\source\repos\TrelloClone\backend\TC.WebAPI
+2026-06-20 22:27:35.859 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7298/api/GetWeatherForecasts - null null
+2026-06-20 22:27:35.890 +05:30 [INF] HTTP GET /api/GetWeatherForecasts responded 404 in 4.8356 ms
+2026-06-20 22:27:35.894 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7298/api/GetWeatherForecasts - 404 null null 35.6756ms
+2026-06-20 22:27:35.896 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7298/api/GetWeatherForecasts, Response status code: 404
+2026-06-20 22:30:13.144 +05:30 [INF] Now listening on: https://localhost:7298
+2026-06-20 22:30:13.174 +05:30 [INF] Now listening on: http://localhost:5136
+2026-06-20 22:30:13.175 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2026-06-20 22:30:13.176 +05:30 [INF] Hosting environment: Development
+2026-06-20 22:30:13.176 +05:30 [INF] Content root path: C:\Users\parir\source\repos\TrelloClone\backend\TC.WebAPI
+2026-06-20 22:30:39.485 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7298/api/weather - null null
+2026-06-20 22:30:39.515 +05:30 [INF] HTTP GET /api/weather responded 404 in 4.9428 ms
+2026-06-20 22:30:39.519 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7298/api/weather - 404 null null 36.2078ms
+2026-06-20 22:30:39.522 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7298/api/weather, Response status code: 404
+2026-06-20 22:30:44.195 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7298/api/weather/get - null null
+2026-06-20 22:30:44.197 +05:30 [INF] HTTP GET /api/weather/get responded 404 in 0.2658 ms
+2026-06-20 22:30:44.197 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7298/api/weather/get - 404 null null 1.7148ms
+2026-06-20 22:30:44.197 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7298/api/weather/get, Response status code: 404
+2026-06-20 22:31:13.295 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7298/api/weather - null null
+2026-06-20 22:31:13.297 +05:30 [INF] HTTP GET /api/weather responded 404 in 0.9867 ms
+2026-06-20 22:31:13.297 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7298/api/weather - 404 null null 1.4338ms
+2026-06-20 22:31:13.297 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7298/api/weather, Response status code: 404
+2026-06-20 22:31:17.808 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7298/weather - null null
+2026-06-20 22:31:17.811 +05:30 [INF] Executing endpoint 'TC.WebAPI.Controllers.WeatherForecastController.GetWeatherForecasts (TC.WebAPI)'
+2026-06-20 22:31:17.840 +05:30 [INF] Route matched with {action = "GetWeatherForecasts", controller = "WeatherForecast"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[System.String[]]] GetWeatherForecasts() on controller TC.WebAPI.Controllers.WeatherForecastController (TC.WebAPI).
+2026-06-20 22:31:25.819 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+ArraySelectIterator`2[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String[], System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-06-20 22:31:25.838 +05:30 [INF] Executed action TC.WebAPI.Controllers.WeatherForecastController.GetWeatherForecasts (TC.WebAPI) in 7994.3192ms
+2026-06-20 22:31:25.838 +05:30 [INF] Executed endpoint 'TC.WebAPI.Controllers.WeatherForecastController.GetWeatherForecasts (TC.WebAPI)'
+2026-06-20 22:31:25.838 +05:30 [INF] HTTP GET /weather responded 200 in 8028.7850 ms
+2026-06-20 22:31:25.839 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7298/weather - 200 null application/json; charset=utf-8 8030.5945ms
+2026-06-20 22:32:01.610 +05:30 [INF] Now listening on: https://localhost:7298
+2026-06-20 22:32:01.641 +05:30 [INF] Now listening on: http://localhost:5136
+2026-06-20 22:32:01.643 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2026-06-20 22:32:01.643 +05:30 [INF] Hosting environment: Development
+2026-06-20 22:32:01.643 +05:30 [INF] Content root path: C:\Users\parir\source\repos\TrelloClone\backend\TC.WebAPI
+2026-06-20 22:32:14.936 +05:30 [INF] Now listening on: https://localhost:7298
+2026-06-20 22:32:14.969 +05:30 [INF] Now listening on: http://localhost:5136
+2026-06-20 22:32:14.970 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2026-06-20 22:32:14.970 +05:30 [INF] Hosting environment: Development
+2026-06-20 22:32:14.970 +05:30 [INF] Content root path: C:\Users\parir\source\repos\TrelloClone\backend\TC.WebAPI
+2026-06-20 22:32:19.611 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7298/weather - null null
+2026-06-20 22:32:19.642 +05:30 [INF] Executing endpoint 'TC.WebAPI.Controllers.WeatherForecastController.GetWeatherForecasts (TC.WebAPI)'
+2026-06-20 22:32:19.664 +05:30 [INF] Route matched with {action = "GetWeatherForecasts", controller = "WeatherForecast"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[System.String]] GetWeatherForecasts() on controller TC.WebAPI.Controllers.WeatherForecastController (TC.WebAPI).
+2026-06-20 22:32:19.672 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+ArraySelectIterator`2[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-06-20 22:32:19.692 +05:30 [INF] Executed action TC.WebAPI.Controllers.WeatherForecastController.GetWeatherForecasts (TC.WebAPI) in 24.2465ms
+2026-06-20 22:32:19.693 +05:30 [INF] Executed endpoint 'TC.WebAPI.Controllers.WeatherForecastController.GetWeatherForecasts (TC.WebAPI)'
+2026-06-20 22:32:19.696 +05:30 [INF] HTTP GET /weather responded 200 in 58.5974 ms
+2026-06-20 22:32:19.700 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7298/weather - 200 null application/json; charset=utf-8 90.819ms
+2026-06-20 22:32:48.825 +05:30 [INF] Now listening on: https://localhost:7298
+2026-06-20 22:32:48.854 +05:30 [INF] Now listening on: http://localhost:5136
+2026-06-20 22:32:48.855 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2026-06-20 22:32:48.856 +05:30 [INF] Hosting environment: Development
+2026-06-20 22:32:48.856 +05:30 [INF] Content root path: C:\Users\parir\source\repos\TrelloClone\backend\TC.WebAPI
+2026-06-20 22:33:07.818 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7298/weather - null null
+2026-06-20 22:33:07.848 +05:30 [INF] HTTP GET /weather responded 404 in 5.2138 ms
+2026-06-20 22:33:07.853 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7298/weather - 404 null null 36.2513ms
+2026-06-20 22:33:07.855 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7298/weather, Response status code: 404
+2026-06-20 22:33:13.776 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7298/api/weather - null null
+2026-06-20 22:33:13.779 +05:30 [INF] Executing endpoint 'TC.WebAPI.Controllers.WeatherForecastController.GetWeatherForecasts (TC.WebAPI)'
+2026-06-20 22:33:13.807 +05:30 [INF] Route matched with {action = "GetWeatherForecasts", controller = "WeatherForecast"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[System.String]] GetWeatherForecasts() on controller TC.WebAPI.Controllers.WeatherForecastController (TC.WebAPI).
+2026-06-20 22:33:13.815 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+ArraySelectIterator`2[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-06-20 22:33:13.834 +05:30 [INF] Executed action TC.WebAPI.Controllers.WeatherForecastController.GetWeatherForecasts (TC.WebAPI) in 22.8228ms
+2026-06-20 22:33:13.834 +05:30 [INF] Executed endpoint 'TC.WebAPI.Controllers.WeatherForecastController.GetWeatherForecasts (TC.WebAPI)'
+2026-06-20 22:33:13.834 +05:30 [INF] HTTP GET /api/weather responded 200 in 56.0079 ms
+2026-06-20 22:33:13.834 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7298/api/weather - 200 null application/json; charset=utf-8 58.4288ms
+2026-06-20 22:36:19.471 +05:30 [INF] Now listening on: https://localhost:7298
+2026-06-20 22:36:19.503 +05:30 [INF] Now listening on: http://localhost:5136
+2026-06-20 22:36:19.505 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2026-06-20 22:36:19.505 +05:30 [INF] Hosting environment: Development
+2026-06-20 22:36:19.505 +05:30 [INF] Content root path: C:\Users\parir\source\repos\TrelloClone\backend\TC.WebAPI
+2026-06-20 22:36:39.021 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7298/api/weather - null null
+2026-06-20 22:36:39.057 +05:30 [INF] HTTP GET /api/weather responded 404 in 5.9070 ms
+2026-06-20 22:36:39.062 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7298/api/weather - 404 null null 42.3718ms
+2026-06-20 22:36:39.065 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7298/api/weather, Response status code: 404
+2026-06-20 22:36:41.831 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7298/api/WeatherForecast - null null
+2026-06-20 22:36:41.833 +05:30 [INF] HTTP GET /api/WeatherForecast responded 404 in 0.3797 ms
+2026-06-20 22:36:41.834 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7298/api/WeatherForecast - 404 null null 2.1755ms
+2026-06-20 22:36:41.834 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7298/api/WeatherForecast, Response status code: 404
+2026-06-20 22:36:43.981 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7298/api/WeatherForecast - null null
+2026-06-20 22:36:43.983 +05:30 [INF] HTTP GET /api/WeatherForecast responded 404 in 1.4445 ms
+2026-06-20 22:36:43.983 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7298/api/WeatherForecast - 404 null null 2.1601ms
+2026-06-20 22:36:43.983 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7298/api/WeatherForecast, Response status code: 404
+2026-06-20 22:36:44.633 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7298/api/WeatherForecast - null null
+2026-06-20 22:36:44.634 +05:30 [INF] HTTP GET /api/WeatherForecast responded 404 in 0.1180 ms
+2026-06-20 22:36:44.635 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7298/api/WeatherForecast - 404 null null 1.4039ms
+2026-06-20 22:36:44.635 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7298/api/WeatherForecast, Response status code: 404
+2026-06-20 22:37:37.138 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7298/api/WeatherForecast/GetWeatherForecasts - null null
+2026-06-20 22:37:37.141 +05:30 [INF] Executing endpoint 'TC.WebAPI.Controllers.WeatherForecastController.GetWeatherForecasts (TC.WebAPI)'
+2026-06-20 22:37:37.171 +05:30 [INF] Route matched with {action = "GetWeatherForecasts", controller = "WeatherForecast"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[System.String]] GetWeatherForecasts() on controller TC.WebAPI.Controllers.WeatherForecastController (TC.WebAPI).
+2026-06-20 22:37:37.179 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+ArraySelectIterator`2[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-06-20 22:37:37.200 +05:30 [INF] Executed action TC.WebAPI.Controllers.WeatherForecastController.GetWeatherForecasts (TC.WebAPI) in 24.919ms
+2026-06-20 22:37:37.200 +05:30 [INF] Executed endpoint 'TC.WebAPI.Controllers.WeatherForecastController.GetWeatherForecasts (TC.WebAPI)'
+2026-06-20 22:37:37.200 +05:30 [INF] HTTP GET /api/WeatherForecast/GetWeatherForecasts responded 200 in 60.3935 ms
+2026-06-20 22:37:37.200 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7298/api/WeatherForecast/GetWeatherForecasts - 200 null application/json; charset=utf-8 61.8635ms
+2026-06-20 22:38:03.694 +05:30 [INF] Now listening on: https://localhost:7298
+2026-06-20 22:38:03.751 +05:30 [INF] Now listening on: http://localhost:5136
+2026-06-20 22:38:03.754 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2026-06-20 22:38:03.754 +05:30 [INF] Hosting environment: Development
+2026-06-20 22:38:03.754 +05:30 [INF] Content root path: C:\Users\parir\source\repos\TrelloClone\backend\TC.WebAPI
+2026-06-20 22:38:09.447 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7298/api/WeatherForecast/GetAll - null null
+2026-06-20 22:38:09.482 +05:30 [INF] Executing endpoint 'TC.WebAPI.Controllers.WeatherForecastController.GetAll (TC.WebAPI)'
+2026-06-20 22:38:09.504 +05:30 [INF] Route matched with {action = "GetAll", controller = "WeatherForecast"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[System.String]] GetAll() on controller TC.WebAPI.Controllers.WeatherForecastController (TC.WebAPI).
+2026-06-20 22:38:09.514 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+ArraySelectIterator`2[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-06-20 22:38:09.534 +05:30 [INF] Executed action TC.WebAPI.Controllers.WeatherForecastController.GetAll (TC.WebAPI) in 26.641ms
+2026-06-20 22:38:09.536 +05:30 [INF] Executed endpoint 'TC.WebAPI.Controllers.WeatherForecastController.GetAll (TC.WebAPI)'
+2026-06-20 22:38:09.540 +05:30 [INF] HTTP GET /api/WeatherForecast/GetAll responded 200 in 62.7373 ms
+2026-06-20 22:38:09.545 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7298/api/WeatherForecast/GetAll - 200 null application/json; charset=utf-8 99.2014ms

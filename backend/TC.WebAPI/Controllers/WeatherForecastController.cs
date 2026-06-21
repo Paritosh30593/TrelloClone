@@ -1,26 +1,30 @@
 using Microsoft.AspNetCore.Mvc;
+using TC.WebAPI.Controllers.Base;
 
 namespace TC.WebAPI.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class WeatherForecastController : ControllerBase
+    public class WeatherForecastController : BaseController
     {
         private static readonly string[] Summaries =
         [
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         ];
 
-        [HttpGet(Name = "GetWeatherForecast")]
-        public IEnumerable<WeatherForecast> Get()
+        private readonly ILogger<WeatherForecastController> _logger;
+
+        public WeatherForecastController(ILogger<WeatherForecastController> logger)
         {
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-            })
-            .ToArray();
+            _logger = logger;
+        }
+
+        /// <summary>
+        /// Get a list of weather forecasts with random data.
+        /// </summary>
+        /// <returns>A list of weather forecasts.</returns>
+        [HttpGet]
+        public ActionResult<IEnumerable<string>> GetAll()
+        {
+            return Ok(Summaries.Select(s => s));
         }
     }
 }
