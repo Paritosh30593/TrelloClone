@@ -1,6 +1,6 @@
-using Microsoft.EntityFrameworkCore;
 using Serilog;
-using TC.Infrastructure.DBContext;
+using TC.Infrastructure;
+using TC.Application;
 
 namespace TC.WebAPI.StartupExtensions
 {
@@ -16,10 +16,8 @@ namespace TC.WebAPI.StartupExtensions
                 .ReadFrom.Services(services);
             });
 
-            services.AddDbContext<TrelloCloneDBContext>(options =>
-            {
-                options.UseSqlite(builder.Configuration.GetConnectionString("TC"));
-            });
+            services.ConfigureInfrastructureServices(builder.Configuration);
+            services.ConfigureApplicationServices(builder.Configuration);
 
             builder.Services.AddControllers();
             builder.Services.AddOpenApi();

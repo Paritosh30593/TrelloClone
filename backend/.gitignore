@@ -6,4 +6,7 @@ obj/
 
 .vs/
 
-appsettings.Development.json
+source/
+logs/
+
+appsettings.*.json

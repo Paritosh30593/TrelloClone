@@ -7,7 +7,7 @@ namespace TC.Domain.RespositoryContracts
         void Create(T entity);
         void Update(T entity);
         void Delete(T entity);
-        Task<T?> Get(K id, CancellationToken cancellationToken);
-        Task<List<T>> GetAll(CancellationToken cancellationToken);
+        Task<T?> GetByIdAsync(K id, CancellationToken cancellationToken);
+        Task<List<T>> GetAllAsync(CancellationToken cancellationToken);
     }
 }

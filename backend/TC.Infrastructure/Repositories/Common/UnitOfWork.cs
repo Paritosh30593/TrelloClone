@@ -3,14 +3,9 @@ using TC.Infrastructure.DBContext;
 
 namespace TC.Infrastructure.Repositories
 {
-    public class UnitOfWork : IUnitOfWork
+    public class UnitOfWork(TrelloCloneDBContext context) : IUnitOfWork
     {
-        private readonly TrelloCloneDBContext _context;
-
-        public UnitOfWork(TrelloCloneDBContext context)
-        {
-            _context = context;
-        }
+        private readonly TrelloCloneDBContext _context = context;
 
         public Task Save(CancellationToken cancellationToken)
         {

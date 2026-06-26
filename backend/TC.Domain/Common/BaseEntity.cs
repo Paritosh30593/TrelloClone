@@ -5,6 +5,7 @@ namespace TC.Domain.Common
     public class BaseEntity<T>
     {
         [Key]
-        public required T ID { get; set; }
+        public required T Id { get; set; }
+        public DateTime CreatedAt { get; set; }
     }
 }
