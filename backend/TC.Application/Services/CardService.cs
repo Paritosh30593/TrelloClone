@@ -1,9 +1,9 @@
 using TC.Application.RespositoryContracts;
-using TC.Application.ServiceContracts.CardAggregate;
+using TC.Application.ServiceContracts;
 
 namespace TC.Application.Services
 {
-    public class CardService : ICardGetterService, ICardUpdaterService, ICardAdderService, ICardDeleterService
+    public class CardService : ICardService
     {
         private readonly ICardRepository _cardRepository;
 

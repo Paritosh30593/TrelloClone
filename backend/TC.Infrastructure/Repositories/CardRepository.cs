@@ -4,7 +4,7 @@ using TC.Infrastructure.DBContext;
 
 namespace TC.Infrastructure.Repositories
 {
-    public class CardRepository : BaseRepository<Card, int>, ICardRepository
+    public class CardRepository : BaseRepository<Card>, ICardRepository
     {
         private readonly TrelloCloneDBContext _context;
 

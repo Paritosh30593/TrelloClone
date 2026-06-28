@@ -22,13 +22,23 @@ namespace TC.WebAPI.Middleware
 
                 if (ex.InnerException != null)
                 {
-                    _logger.LogError("[{id}] {ExceptionType}: {Exception}", id, ex.InnerException.GetType().Name, ex.InnerException.Message);
+                    _logger.LogError(exception: ex.InnerException, message: $"[{id}] {ex.InnerException.GetType().Name}: {ex.InnerException.Message}");
                 }
                 else
                 {
-                    _logger.LogError("[{id}] {ExceptionType}: {Exception}", id, ex.GetType().Name, ex.Message);
+                    _logger.LogError(exception: ex, message: $"[{id}] {ex.GetType().Name}: {ex.Message}");
                 }
-                throw;
+
+                httpContext.Response.StatusCode = ex switch
+                {
+                    ArgumentNullException => StatusCodes.Status400BadRequest,
+                    UnauthorizedAccessException => StatusCodes.Status401Unauthorized,
+                    KeyNotFoundException => StatusCodes.Status404NotFound,
+                    _ => StatusCodes.Status500InternalServerError,
+                };
+
+                httpContext.Response.ContentType = "application/json";
+                await httpContext.Response.WriteAsJsonAsync(new { error = "An error occurred while processing your request.", traceId = id });
             }
         }
     }

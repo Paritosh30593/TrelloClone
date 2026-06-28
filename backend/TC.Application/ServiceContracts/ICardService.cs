@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TC.Application.ServiceContracts.ColumnAggregate
+namespace TC.Application.ServiceContracts
 {
-    public interface IColumnAdderService
+    public interface ICardService
     {
-        
+
     }
 }
