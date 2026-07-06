@@ -1,6 +1,8 @@
 using Serilog;
 using TC.Infrastructure;
 using TC.Application;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Builder;
 
 namespace TC.WebAPI.StartupExtensions
 {
@@ -19,8 +21,18 @@ namespace TC.WebAPI.StartupExtensions
             services.ConfigureInfrastructureServices(builder.Configuration);
             services.ConfigureApplicationServices(builder.Configuration);
 
-            builder.Services.AddControllers();
-            builder.Services.AddOpenApi();
+            services.AddControllers();
+            services.AddOpenApi();
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowFrontend", policy =>
+                {
+                    policy.WithOrigins("http://localhost:3000")
+                          .AllowAnyHeader()
+                          .AllowAnyMethod();
+                });
+            });
 
             return services;
         }

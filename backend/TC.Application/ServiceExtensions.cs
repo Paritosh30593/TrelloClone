@@ -1,14 +1,21 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using TC.Application.Services;
+using TC.Application.Helpers;
 using TC.Application.ServiceContracts;
+using TC.Application.Services;
+
 namespace TC.Application
 {
     public static class ServiceExtensions
     {
         public static void ConfigureApplicationServices(this IServiceCollection services, IConfiguration configuration)
         {
-            // Add application services here
+            #region Options
+
+            services.Configure<DefaultColumnsOptions>(
+                configuration.GetSection(DefaultColumnsOptions.SectionName));
+
+            #endregion
 
             #region Services
 
@@ -17,7 +24,6 @@ namespace TC.Application
             services.AddScoped<ICardService, CardService>();
 
             #endregion
-
         }
     }
 }

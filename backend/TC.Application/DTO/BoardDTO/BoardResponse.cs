@@ -1,5 +1,4 @@
 using System;
-using TC.Domain.Entities;
 
 namespace TC.Application.DTO.BoardDTO
 {
@@ -31,28 +30,5 @@ namespace TC.Application.DTO.BoardDTO
         }
 
         public override int GetHashCode() => base.GetHashCode();
-    }
-
-    public static class BoardExtensions
-    {
-        public static BoardUpdateRequest ToBoardUpdateRequest(this Board board) => new()
-        {
-            Id = board.Id,
-            UserId = board.UserId,
-            Title = board.Title,
-            Description = board.Description,
-            Color = board.Color
-        };
-
-        public static BoardResponse ToBoardResponse(this Board board) => new()
-        {
-            Id = board.Id,
-            UserId = board.UserId,
-            Title = board.Title,
-            Description = board.Description,
-            Color = board.Color,
-            UpdatedAt = board.UpdatedAt,
-            CreatedAt = board.CreatedAt
-        };
     }
 }

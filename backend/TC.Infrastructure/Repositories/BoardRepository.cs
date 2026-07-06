@@ -42,9 +42,7 @@ namespace TC.Infrastructure.Repositories
         #region Adders
         public async Task<Board> AddBoardAsync(Board board, CancellationToken cancellationToken = default)
         {
-            int id = await CreateAsync(board, cancellationToken);
-
-            return id > 0 ? await GetByIdAsync(id, cancellationToken) : null;
+            return await CreateAsync(board, cancellationToken);
         }
         #endregion
 

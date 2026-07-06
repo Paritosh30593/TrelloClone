@@ -43,6 +43,14 @@ namespace TC.Application.ServiceContracts
         /// <param name="cancellationToken">A cancellation token.</param>
         /// <returns>A <see cref="ColumnResponse"/> object.</returns>
         Task<ColumnResponse> AddColumnAsync(ColumnAddRequest columnRequest, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Adds default columns for a specific board asynchronously.
+        /// </summary>
+        /// <param name="boardId">The ID of the board.</param>
+        /// <param name="cancellationToken">A cancellation token.</param>
+        /// <returns>The number of default columns added.</returns>
+        Task<int> AddDefaultColumnsByBoardIdAsync(int boardId, CancellationToken cancellationToken = default);
         #endregion
 
 

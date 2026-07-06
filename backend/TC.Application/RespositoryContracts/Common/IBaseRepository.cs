@@ -9,12 +9,12 @@ namespace TC.Application.RespositoryContracts.Common
     public interface IBaseRepository<T> : IReadOnlyRepository<T> where T : class
     {
         /// <summary>
-        /// Creates a new entity in the repository and returns the number of affected rows.
+        /// Creates a new entity in the repository and returns the created entity.
         /// </summary>
-        /// <param name="entity"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        Task<int> CreateAsync(T entity, CancellationToken cancellationToken = default);
+        /// <param name="entity">The entity to create.</param>
+        /// <param name="cancellationToken">A token to monitor for cancellation requests.</param>
+        /// <returns>The created entity.</returns>
+        Task<T> CreateAsync(T entity, CancellationToken cancellationToken = default);
 
 
         /// <summary>

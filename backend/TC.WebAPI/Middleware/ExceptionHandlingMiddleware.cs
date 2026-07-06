@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 
 namespace TC.WebAPI.Middleware
 {
@@ -9,6 +10,14 @@ namespace TC.WebAPI.Middleware
     {
         private readonly ILogger<ExceptionHandlingMiddleware> _logger = logger;
         private readonly RequestDelegate _next = next;
+
+        private static readonly IReadOnlyDictionary<Type, int> _statusMap = new Dictionary<Type, int>
+        {
+            [typeof(ArgumentNullException)] = StatusCodes.Status400BadRequest,
+            [typeof(ArgumentOutOfRangeException)] = StatusCodes.Status400BadRequest,
+            [typeof(UnauthorizedAccessException)] = StatusCodes.Status401Unauthorized,
+            [typeof(KeyNotFoundException)] = StatusCodes.Status404NotFound,
+        };
 
         public async Task InvokeAsync(HttpContext httpContext)
         {
@@ -20,25 +29,15 @@ namespace TC.WebAPI.Middleware
             {
                 string id = Guid.NewGuid().ToString();
 
-                if (ex.InnerException != null)
-                {
-                    _logger.LogError(exception: ex.InnerException, message: $"[{id}] {ex.InnerException.GetType().Name}: {ex.InnerException.Message}");
-                }
-                else
-                {
-                    _logger.LogError(exception: ex, message: $"[{id}] {ex.GetType().Name}: {ex.Message}");
-                }
+                Exception logged = ex.InnerException ?? ex;
+                _logger.LogError(exception: logged, message: $"[{id}] {logged.GetType().Name}: {logged.Message}");
 
-                httpContext.Response.StatusCode = ex switch
-                {
-                    ArgumentNullException => StatusCodes.Status400BadRequest,
-                    UnauthorizedAccessException => StatusCodes.Status401Unauthorized,
-                    KeyNotFoundException => StatusCodes.Status404NotFound,
-                    _ => StatusCodes.Status500InternalServerError,
-                };
+                httpContext.Response.StatusCode = _statusMap.TryGetValue(ex.GetType(), out int status)
+                    ? status
+                    : StatusCodes.Status500InternalServerError;
 
                 httpContext.Response.ContentType = "application/json";
-                await httpContext.Response.WriteAsJsonAsync(new { error = "An error occurred while processing your request.", traceId = id });
+                await httpContext.Response.WriteAsJsonAsync($"An error occurred while processing your request. TraceId: {id}");
             }
         }
     }

@@ -1,8 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using TC.Domain.Entities;
 
 namespace TC.Application.DTO.ColumnDTO
 {
@@ -30,24 +26,5 @@ namespace TC.Application.DTO.ColumnDTO
         }
 
         public override int GetHashCode() => base.GetHashCode();
-    }
-
-    public static class ColumnResponseExtensions
-    {
-        public static ColumnUpdateRequest ToColumnUpdateRequest(this Column column)
-        {
-            return new ColumnUpdateRequest
-            {
-                // Map properties from Column to ColumnUpdateRequest
-            };
-        }
-
-        public static ColumnResponse ToColumnResponse(this Column column)
-        {
-            return new ColumnResponse
-            {
-                // Map properties from Column to ColumnResponse
-            };
-        }
     }
 }

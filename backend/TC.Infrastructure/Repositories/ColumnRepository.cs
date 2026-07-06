@@ -28,7 +28,7 @@ namespace TC.Infrastructure.Repositories
         {
             return await _context.Column
                 .Where(c => c.BoardId == boardId)
-                .OrderByDescending(c => c.SortOrder)
+                .OrderBy(c => c.SortOrder)
                 .ToListAsync(cancellationToken);
         }
 
@@ -42,9 +42,15 @@ namespace TC.Infrastructure.Repositories
         #region Adders
         public async Task<Column> AddColumnAsync(Column column, CancellationToken cancellationToken = default)
         {
-            int id = await CreateAsync(column, cancellationToken);
 
-            return id > 0 ? await GetByIdAsync(id, cancellationToken) : null;
+            return await CreateAsync(column, cancellationToken);
+        }
+
+        public async Task<int> AddDefaultColumnsAsync(List<Column> columns, CancellationToken cancellationToken = default)
+        {
+            await _context.Column.AddRangeAsync(columns, cancellationToken);
+
+            return await _context.SaveChangesAsync(cancellationToken); ;
         }
         #endregion
 

@@ -13,10 +13,12 @@ namespace TC.Application.Services
     public class BoardService : IBoardService
     {
         private readonly IBoardRepository _boardRepository;
+        private readonly IColumnService _columnService;
 
-        public BoardService(IBoardRepository boardRepository)
+        public BoardService(IBoardRepository boardRepository, IColumnService columnService)
         {
             _boardRepository = boardRepository;
+            _columnService = columnService;
         }
 
         #region Getters
@@ -61,6 +63,8 @@ namespace TC.Application.Services
 
             board = await _boardRepository.AddBoardAsync(board, cancellationToken)
                         ?? throw new InvalidOperationException("Failed to add the board.");
+
+            _ = await _columnService.AddDefaultColumnsByBoardIdAsync(board.Id, cancellationToken);
 
             return board.ToBoardResponse();
         }

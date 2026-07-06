@@ -24,10 +24,11 @@ namespace TC.Infrastructure.Repositories
         }
 
         #region IBaseRepository Implementation
-        public async Task<int> CreateAsync(T entity, CancellationToken cancellationToken = default)
+        public async Task<T> CreateAsync(T entity, CancellationToken cancellationToken = default)
         {
-            await _context.AddAsync(entity, cancellationToken);
-            return await _context.SaveChangesAsync(cancellationToken);
+            T addedEntity = (await _context.AddAsync(entity, cancellationToken)).Entity;
+            await _context.SaveChangesAsync(cancellationToken);
+            return addedEntity;
         }
 
         public async Task<bool> UpdateAsync(T entity, CancellationToken cancellationToken = default)

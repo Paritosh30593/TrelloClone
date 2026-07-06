@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Hosting;
 using Serilog;
 using TC.WebAPI.StartupExtensions;
 
@@ -16,6 +18,7 @@ namespace TC.WebAPI
             if (app.Environment.IsDevelopment())
             {
                 app.MapOpenApi();
+                app.UseExceptionHandlingMiddleware();
             }
             else
             {
@@ -24,6 +27,8 @@ namespace TC.WebAPI
 
             app.UseHsts();
             app.UseHttpsRedirection();
+
+            app.UseCors("AllowFrontend");
 
             app.UseSerilogRequestLogging();
 

@@ -1,6 +1,5 @@
 using System;
 using System.ComponentModel.DataAnnotations;
-using TC.Domain.Entities;
 
 namespace TC.Application.DTO.BoardDTO
 {
@@ -20,18 +19,5 @@ namespace TC.Application.DTO.BoardDTO
         public string Color { get; set; }
 
         public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
-    }
-
-    public static class BoardUpdateRequestExtensions
-    {
-        public static Board ToBoard(this BoardUpdateRequest request) => new()
-        {
-            Id = request.Id,
-            UserId = request.UserId,
-            Title = request.Title,
-            Description = request.Description,
-            Color = request.Color,
-            UpdatedAt = request.UpdatedAt
-        };
     }
 }

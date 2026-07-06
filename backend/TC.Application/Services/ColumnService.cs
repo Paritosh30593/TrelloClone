@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Options;
 using TC.Application.DTO.ColumnDTO;
+using TC.Application.Helpers;
 using TC.Application.RespositoryContracts;
 using TC.Application.ServiceContracts;
 using TC.Domain.Entities;
@@ -13,10 +15,12 @@ namespace TC.Application.Services
     public class ColumnService : IColumnService
     {
         private readonly IColumnRepository _columnRepository;
+        private readonly DefaultColumnsOptions _defaultColumnsOptions;
 
-        public ColumnService(IColumnRepository columnRepository)
+        public ColumnService(IColumnRepository columnRepository, IOptions<DefaultColumnsOptions> defaultColumnsOptions)
         {
             _columnRepository = columnRepository;
+            _defaultColumnsOptions = defaultColumnsOptions.Value;
         }
 
         #region Getters
@@ -63,6 +67,25 @@ namespace TC.Application.Services
                 ?? throw new InvalidOperationException("Column cannot be null.");
 
             return column.ToColumnResponse();
+        }
+
+        public async Task<int> AddDefaultColumnsByBoardIdAsync(int boardId, CancellationToken cancellationToken = default)
+        {
+            if (boardId <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(boardId), "Board ID must be greater than zero.");
+            }
+
+            List<Column> defaultColumns = _defaultColumnsOptions.Columns
+                .Select(c => new ColumnAddRequest
+                {
+                    BoardId = boardId,
+                    Title = c.Title,
+                    SortOrder = c.SortOrder
+                }.ToColumn())
+                .ToList();
+
+            return await _columnRepository.AddDefaultColumnsAsync(defaultColumns, cancellationToken);
         }
         #endregion
 
