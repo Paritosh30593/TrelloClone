@@ -42,7 +42,8 @@ namespace TC.Application.DTO.BoardDTO
             UserId = board.UserId,
             Title = board.Title,
             Description = board.Description,
-            Color = board.Color
+            Color = board.Color,
+            UpdatedAt = board.UpdatedAt
         };
     }
 }

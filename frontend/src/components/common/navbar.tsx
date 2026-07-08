@@ -44,7 +44,7 @@ export const Navbar = ({ boardTitle, isEditingTitle, setIsEditingTitle }: {
                             <span className="text-lg sm:text-xl font-bold text-gray-800">{boardTitle}</span>
                         </Link>
                         {!isEditingTitle && (
-                            <Button variant="ghost" size="sm" className="h-7 w-7 shrink-0 p-0" onClick={() => setIsEditingTitle?.(true)}>
+                            <Button variant="ghost" size="sm" className="h-7 w-7 shrink-0 p-0" onClick={() => setIsEditingTitle?.(!isEditingTitle)}>
                                 <MoreHorizontal />
                             </Button>
                         )}

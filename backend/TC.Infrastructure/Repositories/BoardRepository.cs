@@ -50,9 +50,7 @@ namespace TC.Infrastructure.Repositories
         #region Updaters
         public async Task<Board> UpdateBoardAsync(Board board, CancellationToken cancellationToken = default)
         {
-            bool IsSuccess = await UpdateAsync(board, cancellationToken);
-
-            return IsSuccess ? await GetByIdAsync(board.Id, cancellationToken) : null;
+            return await UpdateAsync(board, cancellationToken);
         }
         #endregion
 

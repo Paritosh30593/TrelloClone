@@ -4,6 +4,7 @@ using System.Data.Common;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using TC.Application.RespositoryContracts.Common;
 using TC.Infrastructure.DBContext;
 
@@ -31,10 +32,18 @@ namespace TC.Infrastructure.Repositories
             return addedEntity;
         }
 
-        public async Task<bool> UpdateAsync(T entity, CancellationToken cancellationToken = default)
+        public async Task<T> UpdateAsync(T entity, CancellationToken cancellationToken = default)
         {
-            _context.Update(entity);
-            return await _context.SaveChangesAsync(cancellationToken) > 0;
+            T updatedEntity = _context.Update(entity).Entity;
+
+            // Preserve immutable creation timestamp on update if the entity defines it.
+            EntityEntry<T> entry = _context.Entry(updatedEntity);
+            if (entry.Metadata.FindProperty("CreatedAt") != null)
+            {
+                entry.Property("CreatedAt").IsModified = false;
+            }
+            await _context.SaveChangesAsync(cancellationToken);
+            return updatedEntity;
         }
 
         public async Task<bool> DeleteAsync(T entity, CancellationToken cancellationToken = default)

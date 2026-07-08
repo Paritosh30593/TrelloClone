@@ -4,68 +4,123 @@ import { Navbar } from "@/components/common/navbar";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { useBoard } from "@/hooks/useBoard";
+import { useBoard } from "@/hooks/board/useBoard";
+import { useUpdateBoard } from "@/hooks/board/useUpdateBoard";
+import { BOARD_COLORS } from "@/lib/constants";
+import { IBoardResponse } from "@/types/IBoard";
 import { useParams } from "next/navigation";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 
 
 export default function Board() {
     const { id } = useParams<{ id: string }>();
-    const {
-        fetchBoardById: { data: boardData, error: fetchBoardError, isPending: isFetchingBoard, isError: isFetchBoardError },
-        fetchColumnsByBoardId: { data: columnsData, error: fetchColumnsError, isPending: isFetchingColumns, isError: isFetchColumnsError }
-    } = useBoard(id);
+
+    const { data: boardData, error: fetchBoardError, isPending: isFetchingBoard, isError: isFetchBoardError } = useBoard(id);
+    //const { data: columnsData, error: fetchColumnsError, isPending: isFetchingColumns, isError: isFetchColumnsError } = useColumns(id);
+    const { mutate: updateBoardMutate, isPending: isUpdatingBoard, isError: isUpdateBoardError } = useUpdateBoard();
 
     const [isEditingTitle, setIsEditingTitle] = useState(false);
-    const [newTitle, setNewTitle] = useState("");
-    const [newColor, setNewColor] = useState("");
+    const [editForm, setEditForm] = useState<Pick<IBoardResponse, "title" | "description" | "color">>({
+        title: "",
+        description: "",
+        color: "",
+    });
 
-    const handleCancelEditTitle = (e: React.MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault();
-        setIsEditingTitle(false);
-    }
+    useEffect(() => {
+        const formSetter = () => {
+            if (boardData) {
+                setEditForm({
+                    title: boardData.title,
+                    description: boardData.description,
+                    color: boardData.color,
+                });
+            }
+        };
+        formSetter();
+    }, [boardData]);
 
-    const handleSaveEditTitle = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const handleUpdateBoard = async (e: React.SubmitEvent<HTMLFormElement>) => {
         e.preventDefault();
+
+        if (!editForm.title || !boardData) return;
+
+        updateBoardMutate({
+            id: boardData.id,
+            userId: boardData.userId,
+            title: editForm.title,
+            description: editForm.description,
+            color: editForm.color,
+        });
+
+        if (!isUpdatingBoard && !isUpdateBoardError) {
+            setIsEditingTitle(!isEditingTitle);
+        }
     }
 
     return (
         <Fragment>
-            <Navbar boardTitle={boardData?.title || ""} isEditingTitle={isEditingTitle} setIsEditingTitle={setIsEditingTitle} />
+            <Navbar boardTitle={editForm.title} isEditingTitle={isEditingTitle} setIsEditingTitle={setIsEditingTitle} />
 
             <main className="container mx-auto px-4 py-6 sm:py-8">
-                <Dialog open={isEditingTitle} onOpenChange={setIsEditingTitle}>
-                    <DialogContent className="w-[95vw] max-w-106.25 mx-auto">
+
+                {/* Dialog for editing board */}
+                <Dialog
+                    open={isEditingTitle}
+                    onOpenChange={setIsEditingTitle}
+                >
+                    <DialogContent className="w-[95vw] min-w-max mx-auto">
                         <DialogHeader>
                             <DialogTitle>Edit Board</DialogTitle>
                         </DialogHeader>
 
-                        <form className="space-y-4">
-                            <div>
-                                <label htmlFor="board-title" className="block text-sm font-medium text-gray-700">Board Title</label>
+                        <form className="space-y-4" onSubmit={handleUpdateBoard}>
+                            <div className="space-y-2">
+                                <Label htmlFor="board-title" className="block text-sm font-medium text-gray-500">Board Title</Label>
                                 <Input
-                                    type="text"
                                     id="board-title"
                                     name="board-title"
                                     placeholder="Enter board title"
-                                    defaultValue={boardData?.title}
+                                    value={editForm.title}
+                                    onChange={(e) => setEditForm(prev => ({ ...prev, title: e.target.value }))}
                                     className="mt-1 block w-full rounded-sm focus:border-purple-500 focus:ring-purple-500 sm:text-sm"
                                 />
                             </div>
-                            <div>
-                                <label htmlFor="board-description" className="block text-sm font-medium text-gray-700">Board Description</label>
+                            <div className="space-y-2">
+                                <Label htmlFor="board-description" className="block text-sm font-medium text-gray-500">Board Description</Label>
                                 <Textarea
                                     id="board-description"
                                     name="board-description"
                                     placeholder="Enter board description"
-                                    defaultValue={boardData?.description || ""}
+                                    value={editForm.description ?? ""}
+                                    onChange={(e) => setEditForm(prev => ({ ...prev, description: e.target.value }))}
                                     className="mt-1 block w-full rounded-sm focus:border-purple-500 focus:ring-purple-500 sm:text-sm"
                                 />
                             </div>
+                            <div className="space-y-2">
+                                <Label htmlFor="board-color" className="block text-sm font-medium text-gray-500">Board Color</Label>
+                                <div className="grid grid-cols-6 sm:grid-cols-9 gap-2 justify-items-center">
+                                    {
+                                        BOARD_COLORS.map((color) => (
+                                            <button
+                                                type="button"
+                                                key={color.code}
+                                                onClick={() => setEditForm(prev => ({ ...prev, color: color.code }))}
+                                                className={`w-8 h-8 rounded-full ${color.code} 
+                                                    ${color.code === editForm.color
+                                                        ? `ring-2 ring-offset-2 ${color.name}`
+                                                        : ""
+                                                    }`
+                                                }
+                                            />
+                                        ))
+                                    }
+                                </div>
+                            </div>
                             <div className="flex justify-end space-x-2">
-                                <Button size="lg" variant="outline" onClick={handleCancelEditTitle}>Cancel</Button>
-                                <Button size="lg" type="submit" className="bg-purple-500" onClick={handleSaveEditTitle}>Save</Button>
+                                <Button type="button" size="lg" variant="outline" onClick={() => setIsEditingTitle(!isEditingTitle)}>Cancel</Button>
+                                <Button type="submit" size="lg" className="bg-purple-500">Save Changes</Button>
                             </div>
                         </form>
                     </DialogContent>

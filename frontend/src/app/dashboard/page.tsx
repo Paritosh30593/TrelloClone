@@ -1,24 +1,23 @@
 "use client";
 
+import Link from "next/link";
 import { Navbar } from "@/components/common/navbar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { useBoards } from "@/hooks/useBoards";
+import { useCreateBoard } from "@/hooks/board/useCreateBoard";
+import { useUserBoards } from "@/hooks/board/useUserBoards";
 import { useUser } from "@clerk/nextjs";
 import { ClockFading, Filter, Grid3X3, Kanban, List, Plus, Rocket, Search } from "lucide-react";
-import Link from "next/link";
 import { Fragment, useState } from "react";
 
 export default function DashboardPage() {
     const { user } = useUser();
     const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
 
-    const {
-        createBoard: { data: createBoardData, mutate: createBoardMutate, error: createBoardError, isPending: isCreatingBoard, isError: isCreateBoardError },
-        fetchUserBoards: { data: userBoards, error: fetchBoardsError, isPending: isFetchingBoards, isError: isFetchBoardsError }
-    } = useBoards();
+    const { data: userBoards, error: fetchBoardsError, isPending: isFetchingBoards, isError: isFetchBoardsError } = useUserBoards(user?.id);
+    const { mutate: createBoardMutate } = useCreateBoard();
 
     const handleCreateBoard = () => {
         if (!user?.id) return;
@@ -29,10 +28,6 @@ export default function DashboardPage() {
             description: "This is a new board",
             color: "bg-purple-600",
         });
-
-        if (!isCreatingBoard) {
-            userBoards?.push(createBoardData!);
-        }
     }
 
     return (

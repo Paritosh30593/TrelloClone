@@ -18,12 +18,12 @@ namespace TC.Application.RespositoryContracts.Common
 
 
         /// <summary>
-        /// Updates an existing entity in the repository and returns a boolean indicating whether the update was successful.
+        /// Updates an existing entity in the repository and returns the updated entity.
         /// </summary>
         /// <param name="entity">The entity to update.</param>
         /// <param name="cancellationToken">A token to monitor for cancellation requests.</param>
-        /// <returns>A boolean indicating whether the update was successful.</returns>
-        Task<bool> UpdateAsync(T entity, CancellationToken cancellationToken = default);
+        /// <returns>The updated entity.</returns>
+        Task<T> UpdateAsync(T entity, CancellationToken cancellationToken = default);
 
 
         /// <summary>

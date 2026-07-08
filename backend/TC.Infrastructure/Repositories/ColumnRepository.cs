@@ -58,9 +58,7 @@ namespace TC.Infrastructure.Repositories
         #region Updaters
         public async Task<Column> UpdateColumnAsync(Column column, CancellationToken cancellationToken = default)
         {
-            bool IsSuccess = await UpdateAsync(column, cancellationToken);
-
-            return IsSuccess ? await GetByIdAsync(column.Id, cancellationToken) : null;
+            return await UpdateAsync(column, cancellationToken);
         }
         #endregion
 

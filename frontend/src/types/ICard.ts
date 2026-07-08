@@ -1,4 +1,4 @@
-import { PriorityTypes } from "./PriorityTypes";
+import { Priority } from "./Priority";
 
 export interface ICard {
     id: number;
@@ -7,7 +7,7 @@ export interface ICard {
     description: string | null;
     assignee: string;
     dueDate: string | null;
-    priority: PriorityTypes;
+    priority: Priority;
     sortOrder: number;
     createdAt: string;
 }
