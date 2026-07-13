@@ -21,7 +21,7 @@ namespace TC.WebAPI.Endpoints.Board
             BoardResponse board = await _boardService.GetBoardByIdAsync(id, cancellationToken);
 
             return board == null
-               ? NotFound()
+               ? NotFound("Board not found.")
                : Ok(board);
         }
     }

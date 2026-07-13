@@ -21,7 +21,7 @@ namespace TC.WebAPI.Endpoints.Column
             ColumnResponse column = await _columnService.AddColumnAsync(columnRequest, cancellationToken);
 
             return column == null
-                ? BadRequest()
+                ? BadRequest("Failed to add the column. Please check the request data.")
                 : Ok(column);
         }
     }

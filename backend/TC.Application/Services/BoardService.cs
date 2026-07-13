@@ -29,7 +29,7 @@ namespace TC.Application.Services
                 .ToList();
         }
 
-        public async Task<List<BoardResponse>> GetAllBoardsByUserIdAsync(string userId, CancellationToken cancellationToken = default)
+        public async Task<List<BoardResponse>> GetBoardsByUserIdAsync(string userId, CancellationToken cancellationToken = default)
         {
             if (userId == null)
             {

@@ -21,7 +21,9 @@ namespace TC.WebAPI.Endpoints.Board
         {
             List<BoardResponse> boards = await _boardService.GetAllBoardsAsync(cancellationToken);
 
-            return Ok(boards == null ? new List<BoardResponse>() : boards);
+            return boards == null || boards.Count == 0
+                ? NotFound("No boards found.")
+                : Ok(boards);
         }
     }
 }

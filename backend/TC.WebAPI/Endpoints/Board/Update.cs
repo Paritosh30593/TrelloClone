@@ -21,7 +21,7 @@ namespace TC.WebAPI.Endpoints.Board
             BoardResponse board = await _boardService.UpdateBoardAsync(boardRequest, cancellationToken);
 
             return board == null
-                ? NotFound()
+                ? BadRequest("Board not found or update failed. Please check the request data.")
                 : Ok(board);
         }
     }

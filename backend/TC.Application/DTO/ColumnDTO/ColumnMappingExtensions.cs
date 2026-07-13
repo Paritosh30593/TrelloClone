@@ -29,13 +29,5 @@ namespace TC.Application.DTO.ColumnDTO
             SortOrder = column.SortOrder,
             CreatedAt = column.CreatedAt
         };
-
-        public static ColumnUpdateRequest ToColumnUpdateRequest(this Column column) => new()
-        {
-            Id = column.Id,
-            BoardId = column.BoardId,
-            Title = column.Title,
-            SortOrder = column.SortOrder
-        };
     }
 }

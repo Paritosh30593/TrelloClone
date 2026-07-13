@@ -21,7 +21,7 @@ namespace TC.WebAPI.Endpoints.Board
             BoardResponse board = await _boardService.AddBoardAsync(boardRequest, cancellationToken);
 
             return board == null
-                ? BadRequest()
+                ? BadRequest("Failed to add the board. Please check the request data.")
                 : Ok(board);
         }
     }

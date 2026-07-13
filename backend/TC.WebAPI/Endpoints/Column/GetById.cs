@@ -21,7 +21,7 @@ namespace TC.WebAPI.Endpoints.Column
             ColumnResponse column = await _columnService.GetColumnByIdAsync(id, cancellationToken);
 
             return column == null
-                ? NotFound()
+                ? NotFound("Column not found.")
                 : Ok(column);
         }
     }

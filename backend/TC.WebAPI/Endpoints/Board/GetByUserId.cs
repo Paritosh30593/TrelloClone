@@ -19,10 +19,10 @@ namespace TC.WebAPI.Endpoints.Board
         [HttpGet("user/{userId}")]
         public override async Task<ActionResult<List<BoardResponse>>> HandleAsync(string userId, CancellationToken cancellationToken = default)
         {
-            List<BoardResponse> boards = await _boardService.GetAllBoardsByUserIdAsync(userId, cancellationToken);
+            List<BoardResponse> boards = await _boardService.GetBoardsByUserIdAsync(userId, cancellationToken);
 
-            return boards == null
-                ? NotFound()
+            return boards == null || boards.Count == 0
+                ? NotFound("No boards found for the specified user.")
                 : Ok(boards);
         }
     }

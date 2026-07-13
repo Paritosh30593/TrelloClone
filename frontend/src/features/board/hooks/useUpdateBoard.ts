@@ -1,5 +1,5 @@
-import { updateBoardApi } from "@/apis/boardApi";
-import { IBoardResponse, IBoardUpdateRequest } from "@/types/IBoard";
+import { updateBoardApi } from "@/features/board/api";
+import { IBoardResponse, IBoardUpdateRequest } from "@/features/board/IBoard";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export function useUpdateBoard() {

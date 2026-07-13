@@ -21,8 +21,8 @@ namespace TC.WebAPI.Endpoints.Column
         {
             List<ColumnResponse> columns = await _columnService.GetAllColumnsAsync(cancellationToken);
 
-            return columns == null
-                ? NotFound()
+            return columns == null || columns.Count == 0
+                ? NotFound("Columns not found.")
                 : Ok(columns);
         }
     }

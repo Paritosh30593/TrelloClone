@@ -19,7 +19,9 @@ namespace TC.WebAPI.Endpoints.Column
         {
             bool isDeleted = await _columnService.DeleteColumnAsync(id, cancellationToken);
 
-            return Ok(isDeleted);
+            return isDeleted
+                ? Ok("Column deleted successfully.")
+                : BadRequest("Failed to delete the column. The column may not exist or an error occurred.");
         }
     }
 }

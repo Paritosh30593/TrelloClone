@@ -1,3 +1,5 @@
+import { ICardResponse } from "../card/ICard";
+
 export interface IColumnResponse {
     id: number;
     boardId: number;
@@ -17,4 +19,8 @@ export interface IColumnUpdateRequest {
     boardId: number;
     title: string;
     sortOrder: number;
+}
+
+export interface IColumnWithCardsResponse extends IColumnResponse {
+    cards: ICardResponse[];
 }

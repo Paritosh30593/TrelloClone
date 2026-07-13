@@ -1,5 +1,5 @@
-import { getBoardsByUserIdApi } from "@/apis/boardApi";
-import { IBoardResponse } from "@/types/IBoard";
+import { getBoardsByUserIdApi } from "@/features/board/api";
+import { IBoardResponse } from "@/features/board/IBoard";
 import { useQuery } from "@tanstack/react-query";
 
 export function useUserBoards(id: string | undefined) {

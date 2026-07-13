@@ -26,8 +26,8 @@ export default function RootLayout({
 }>) {
     return (
         <ClerkProvider>
-            <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
-                <body className="min-h-fit flex flex-col bg-linear-to-br from-blue-200 via-purple-200 to-amber-200">
+            <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-max antialiased`}>
+                <body className="min-h-fit flex flex-col bg-linear-to-bl from-blue-200 via-purple-200 to-amber-200">
                     <QueryProvider>
                         <div className="min-h-screen">
                             {children}

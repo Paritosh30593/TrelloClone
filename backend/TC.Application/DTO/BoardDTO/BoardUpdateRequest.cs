@@ -15,9 +15,7 @@ namespace TC.Application.DTO.BoardDTO
         public string Title { get; set; }
 
         public string Description { get; set; }
-
         public string Color { get; set; }
-
         public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
     }
 }

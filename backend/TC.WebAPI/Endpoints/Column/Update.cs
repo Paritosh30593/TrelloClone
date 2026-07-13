@@ -21,7 +21,7 @@ namespace TC.WebAPI.Endpoints.Column
             ColumnResponse column = await _columnService.UpdateColumnAsync(columnRequest, cancellationToken);
 
             return column == null
-                ? BadRequest()
+                ? BadRequest("Failed to update the column. Please check the request data.")
                 : Ok(column);
         }
     }

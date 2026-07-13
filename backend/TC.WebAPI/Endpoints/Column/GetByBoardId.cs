@@ -19,10 +19,10 @@ namespace TC.WebAPI.Endpoints.Column
         [HttpGet("board/{boardId}")]
         public override async Task<ActionResult<List<ColumnResponse>>> HandleAsync(int boardId, CancellationToken cancellationToken = default)
         {
-            List<ColumnResponse> columns = await _columnService.GetAllColumnsByBoardIdAsync(boardId, cancellationToken);
+            List<ColumnResponse> columns = await _columnService.GetColumnsByBoardIdAsync(boardId, cancellationToken);
 
-            return columns == null
-                ? NotFound()
+            return columns == null || columns.Count == 0
+                ? NotFound("No columns found for the specified board.")
                 : Ok(columns);
         }
     }

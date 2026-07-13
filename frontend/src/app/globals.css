@@ -113,6 +113,13 @@
   color: var(--button-text-color);
 }
 
+.req {
+  &::after {
+    content: " *";
+    color: red;
+  }
+}
+
 @layer base {
   * {
     border-color: var(--border);

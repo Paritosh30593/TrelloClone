@@ -24,7 +24,7 @@ namespace TC.Infrastructure.Repositories
             return await ListAllAsync(cancellationToken);
         }
 
-        public async Task<IEnumerable<Column>> GetAllColumnsByBoardIdAsync(int boardId, CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<Column>> GetColumnsByBoardIdAsync(int boardId, CancellationToken cancellationToken = default)
         {
             return await _context.Column
                 .Where(c => c.BoardId == boardId)
@@ -35,6 +35,15 @@ namespace TC.Infrastructure.Repositories
         public async Task<Column> GetColumnByIdAsync(int id, CancellationToken cancellationToken = default)
         {
             return await GetByIdAsync(id, cancellationToken);
+        }
+
+        public async Task<IEnumerable<Column>> GetBoardColumnsWithCardsAsync(int boardId, CancellationToken cancellationToken = default)
+        {
+            return await _context.Column
+                .Include(c => c.Cards.OrderBy(card => card.SortOrder))
+                .Where(c => c.BoardId == boardId)
+                .OrderBy(c => c.SortOrder)
+                .ToListAsync(cancellationToken);
         }
         #endregion
 

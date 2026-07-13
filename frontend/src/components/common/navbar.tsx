@@ -1,16 +1,20 @@
 "use client";
 
 import { SignInButton, SignUpButton, UserButton, useUser } from "@clerk/nextjs";
-import { MoreHorizontal, SquareKanban } from "lucide-react";
+import { Filter, MoreHorizontal, SquareKanban } from "lucide-react";
 import Link from "next/link";
 import { Button } from "../ui/button";
 import { usePathname } from "next/navigation";
+import { Badge } from "../ui/badge";
 
-export const Navbar = ({ boardTitle, isEditingTitle, setIsEditingTitle }: {
-    boardTitle?: string,
-    isEditingTitle?: boolean,
-    setIsEditingTitle?: (isEditing: boolean) => void
-}) => {
+type NavbarProps = {
+    boardTitle?: string;
+    setIsEditingTitle?: (isEditing: boolean) => void;
+    onFilterClick?: () => void;
+    filterCount?: number;
+};
+
+export const Navbar = ({ boardTitle, setIsEditingTitle, onFilterClick, filterCount = 0 }: NavbarProps) => {
     const { isSignedIn } = useUser();
     const pathname = usePathname();
 
@@ -43,14 +47,34 @@ export const Navbar = ({ boardTitle, isEditingTitle, setIsEditingTitle }: {
                             <SquareKanban className="h-5 w-5 sm:h-7 sm:w-7 text-purple-600" />
                             <span className="text-lg sm:text-xl font-bold text-gray-800">{boardTitle}</span>
                         </Link>
-                        {!isEditingTitle && (
-                            <Button variant="ghost" size="sm" className="h-7 w-7 shrink-0 p-0" onClick={() => setIsEditingTitle?.(!isEditingTitle)}>
-                                <MoreHorizontal />
-                            </Button>
-                        )}
+                        <Button variant="ghost" size="sm" className="h-7 w-7 shrink-0 p-0" onClick={() => setIsEditingTitle?.(true)}>
+                            <MoreHorizontal />
+                        </Button>
                     </div>
 
                     <div className="flex items-center gap-2 sm:gap-3">
+                        {
+                            // onFilterClick && (
+                            <Button
+                                size="sm"
+                                onClick={onFilterClick}
+                                className={`text-xs sm:text-sm 
+                                    ${filterCount > 0
+                                        ? "bg-purple-200 text-purple-700 hover:bg-purple-300"
+                                        : "nav-btn-style"
+                                    }`
+                                }
+                            >
+                                <Filter className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
+                                <span className="hidden sm:inline">Filter</span>
+                                {
+                                    filterCount > 0 && (
+                                        <Badge variant="secondary" className="ml-1 sm:ml-2 text-purple-700 p-1.5 text-2xs sm:text-xs">{filterCount}</Badge>
+                                    )
+                                }
+                            </Button>
+                            //)
+                        }
                         <UserButton userProfileMode="navigation" userProfileUrl="/user-profile" />
                     </div>
                 </div>

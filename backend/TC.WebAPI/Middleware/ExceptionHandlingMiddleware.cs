@@ -30,6 +30,7 @@ namespace TC.WebAPI.Middleware
                 string id = Guid.NewGuid().ToString();
 
                 Exception logged = ex.InnerException ?? ex;
+
                 _logger.LogError(exception: logged, message: $"[{id}] {logged.GetType().Name}: {logged.Message}");
 
                 httpContext.Response.StatusCode = _statusMap.TryGetValue(ex.GetType(), out int status)
@@ -37,6 +38,7 @@ namespace TC.WebAPI.Middleware
                     : StatusCodes.Status500InternalServerError;
 
                 httpContext.Response.ContentType = "application/json";
+
                 await httpContext.Response.WriteAsJsonAsync($"An error occurred while processing your request. TraceId: {id}");
             }
         }

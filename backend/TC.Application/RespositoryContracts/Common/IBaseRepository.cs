@@ -14,6 +14,7 @@ namespace TC.Application.RespositoryContracts.Common
         /// <param name="entity">The entity to create.</param>
         /// <param name="cancellationToken">A token to monitor for cancellation requests.</param>
         /// <returns>The created entity.</returns>
+        /// <remarks> This method is intended to be used when creating a new entity in the repository. It can be used to add entities with specific properties, enabling users to create new records for their data. </remarks>
         Task<T> CreateAsync(T entity, CancellationToken cancellationToken = default);
 
 
@@ -23,6 +24,7 @@ namespace TC.Application.RespositoryContracts.Common
         /// <param name="entity">The entity to update.</param>
         /// <param name="cancellationToken">A token to monitor for cancellation requests.</param>
         /// <returns>The updated entity.</returns>
+        /// <remarks> This method is intended to be used when updating an existing entity in the repository. It can be used to modify entity details such as name, description, or other relevant information, facilitating the management of records over time. </remarks>
         Task<T> UpdateAsync(T entity, CancellationToken cancellationToken = default);
 
 
@@ -32,6 +34,7 @@ namespace TC.Application.RespositoryContracts.Common
         /// <param name="entity">The entity to delete.</param>
         /// <param name="cancellationToken">A token to monitor for cancellation requests.</param>
         /// <returns>A boolean indicating whether the deletion was successful.</returns>
+        /// <remarks> This method is intended to be used when deleting an existing entity in the repository. It can be used to remove records that are no longer needed, helping to maintain a clean and organized set of data. </remarks>
         Task<bool> DeleteAsync(T entity, CancellationToken cancellationToken = default);
 
 
@@ -41,6 +44,7 @@ namespace TC.Application.RespositoryContracts.Common
         /// <param name="entities">The entities to delete.</param>
         /// <param name="cancellationToken">A token to monitor for cancellation requests.</param>
         /// <returns>A boolean indicating whether the deletion was successful.</returns>
+        /// <remarks> This method is intended to be used when deleting a range of existing entities in the repository. It can be used to remove multiple records that are no longer needed, helping to maintain a clean and organized set of data. </remarks>
         Task<bool> DeleteRangeAsync(IEnumerable<T> entities, CancellationToken cancellationToken = default);
     }
 }

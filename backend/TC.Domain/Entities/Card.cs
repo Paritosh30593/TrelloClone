@@ -21,10 +21,12 @@ namespace TC.Domain.Entities
         public DateTime? DueDate { get; set; }
 
         [StringLength(20, ErrorMessage = "Priority cannot exceed 20 characters.")]
-        public string Priority { get; set; } = "Medium";
+        public string Priority { get; set; }
 
         [Range(0, int.MaxValue, ErrorMessage = "SortOrder must be a positive integer.")]
         public int SortOrder { get; set; } = 0;
+
+        public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 
         [ForeignKey("ColumnId")]
         public virtual Column Column { get; set; }

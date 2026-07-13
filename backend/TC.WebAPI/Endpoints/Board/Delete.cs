@@ -19,7 +19,9 @@ namespace TC.WebAPI.Endpoints.Board
         {
             bool isDeleted = await _boardService.DeleteBoardAsync(id, cancellationToken);
 
-            return Ok(isDeleted);
+            return isDeleted
+                ? Ok("Board deleted successfully.")
+                : BadRequest("Failed to delete the board. The board may not exist or an error occurred.");
         }
     }
 }

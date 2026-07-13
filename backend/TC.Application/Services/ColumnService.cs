@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 using TC.Application.DTO.ColumnDTO;
+using TC.Application.DTO.ColumnWithCardsDTO;
 using TC.Application.Helpers;
 using TC.Application.RespositoryContracts;
 using TC.Application.ServiceContracts;
@@ -31,13 +32,13 @@ namespace TC.Application.Services
                 .ToList();
         }
 
-        public async Task<List<ColumnResponse>> GetAllColumnsByBoardIdAsync(int boardId, CancellationToken cancellationToken = default)
+        public async Task<List<ColumnResponse>> GetColumnsByBoardIdAsync(int boardId, CancellationToken cancellationToken = default)
         {
             if (boardId <= 0)
             {
                 return new List<ColumnResponse>();
             }
-            return (await _columnRepository.GetAllColumnsByBoardIdAsync(boardId, cancellationToken))
+            return (await _columnRepository.GetColumnsByBoardIdAsync(boardId, cancellationToken))
                 .Select(c => c.ToColumnResponse())
                 .ToList();
         }
@@ -49,6 +50,17 @@ namespace TC.Application.Services
                 return null;
             }
             return (await _columnRepository.GetColumnByIdAsync(id, cancellationToken))?.ToColumnResponse();
+        }
+
+        public async Task<List<ColumnWithCardsResponse>> GetBoardColumnsWithCardsAsync(int boardId, CancellationToken cancellationToken = default)
+        {
+            if (boardId <= 0)
+            {
+                return new List<ColumnWithCardsResponse>();
+            }
+            return (await _columnRepository.GetBoardColumnsWithCardsAsync(boardId, cancellationToken))
+                .Select(c => c.ToColumnWithCardsResponse())
+                .ToList();
         }
         #endregion
 

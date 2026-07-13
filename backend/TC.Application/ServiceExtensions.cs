@@ -14,6 +14,8 @@ namespace TC.Application
 
             services.Configure<DefaultColumnsOptions>(
                 configuration.GetSection(DefaultColumnsOptions.SectionName));
+            services.Configure<DefaultCardsOptions>(
+                configuration.GetSection(DefaultCardsOptions.SectionName));
 
             #endregion
 

@@ -1,5 +1,5 @@
-import { createBoardApi } from "@/apis/boardApi";
-import { IBoardAddRequest, IBoardResponse } from "@/types/IBoard";
+import { createBoardApi } from "@/features/board/api";
+import { IBoardAddRequest, IBoardResponse } from "@/features/board/IBoard";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export function useCreateBoard() {

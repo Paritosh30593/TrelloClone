@@ -35,15 +35,5 @@ namespace TC.Application.DTO.BoardDTO
             UpdatedAt = board.UpdatedAt,
             CreatedAt = board.CreatedAt
         };
-
-        public static BoardUpdateRequest ToBoardUpdateRequest(this Board board) => new()
-        {
-            Id = board.Id,
-            UserId = board.UserId,
-            Title = board.Title,
-            Description = board.Description,
-            Color = board.Color,
-            UpdatedAt = board.UpdatedAt
-        };
     }
 }

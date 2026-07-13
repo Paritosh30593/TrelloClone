@@ -1,3 +1,8 @@
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using TC.Application.RespositoryContracts;
 using TC.Domain.Entities;
 using TC.Infrastructure.DBContext;
@@ -12,5 +17,58 @@ namespace TC.Infrastructure.Repositories
         {
             _context = context;
         }
+
+        #region Getters
+        public async Task<IEnumerable<Card>> GetAllCardsAsync(CancellationToken cancellationToken = default)
+        {
+            return await ListAllAsync(cancellationToken);
+        }
+
+        public async Task<IEnumerable<Card>> GetCardsByColumnIdAsync(int columnId, CancellationToken cancellationToken = default)
+        {
+            return await _context.Card
+                .Where(c => c.ColumnId == columnId)
+                .OrderBy(c => c.SortOrder)
+                .ToListAsync(cancellationToken);
+        }
+
+        public async Task<Card> GetCardByIdAsync(int id, CancellationToken cancellationToken = default)
+        {
+            return await GetByIdAsync(id, cancellationToken);
+        }
+        #endregion
+
+
+        #region Adders
+        public async Task<Card> AddCardAsync(Card card, CancellationToken cancellationToken = default)
+        {
+            return await CreateAsync(card, cancellationToken);
+        }
+
+        public async Task<int> AddDefaultCardsToColumnAsync(List<Card> cards, CancellationToken cancellationToken = default)
+        {
+            await _context.Card.AddRangeAsync(cards, cancellationToken);
+
+            return await _context.SaveChangesAsync(cancellationToken);
+        }
+        #endregion
+
+
+        #region Updaters
+        public async Task<Card> UpdateCardAsync(Card card, CancellationToken cancellationToken = default)
+        {
+            return await UpdateAsync(card, cancellationToken);
+        }
+        #endregion
+
+
+        #region Deleters
+        public async Task<bool> DeleteCardAsync(int id, CancellationToken cancellationToken = default)
+        {
+            Card cardToDelete = await GetByIdAsync(id, cancellationToken);
+
+            return cardToDelete != null && await DeleteAsync(cardToDelete, cancellationToken);
+        }
+        #endregion
     }
 }
