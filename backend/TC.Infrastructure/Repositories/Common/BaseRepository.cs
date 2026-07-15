@@ -1,6 +1,6 @@
-
 using System.Collections.Generic;
 using System.Data.Common;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -32,18 +32,43 @@ namespace TC.Infrastructure.Repositories
             return addedEntity;
         }
 
+        public async Task<IEnumerable<T>> CreateRangeAsync(IEnumerable<T> entities, CancellationToken cancellationToken = default)
+        {
+            await _context.Set<T>().AddRangeAsync(entities, cancellationToken);
+            await _context.SaveChangesAsync(cancellationToken);
+            return entities;
+        }
+
         public async Task<T> UpdateAsync(T entity, CancellationToken cancellationToken = default)
         {
             T updatedEntity = _context.Update(entity).Entity;
 
-            // Preserve immutable creation timestamp on update if the entity defines it.
             EntityEntry<T> entry = _context.Entry(updatedEntity);
             if (entry.Metadata.FindProperty("CreatedAt") != null)
             {
                 entry.Property("CreatedAt").IsModified = false;
             }
+
             await _context.SaveChangesAsync(cancellationToken);
             return updatedEntity;
+        }
+
+        public async Task<IEnumerable<T>> UpdateRangeAsync(IEnumerable<T> entities, CancellationToken cancellationToken = default)
+        {
+            List<T> entityList = entities.ToList();
+            _context.Set<T>().UpdateRange(entityList);
+
+            foreach (T entity in entityList)
+            {
+                EntityEntry<T> entry = _context.Entry(entity);
+                if (entry.Metadata.FindProperty("CreatedAt") != null)
+                {
+                    entry.Property("CreatedAt").IsModified = false;
+                }
+            }
+
+            await _context.SaveChangesAsync(cancellationToken);
+            return entityList;
         }
 
         public async Task<bool> DeleteAsync(T entity, CancellationToken cancellationToken = default)

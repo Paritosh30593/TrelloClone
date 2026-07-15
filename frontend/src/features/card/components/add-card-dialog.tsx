@@ -7,12 +7,45 @@ import { Textarea } from "@/components/ui/textarea";
 import { nameof } from "@/lib/utils";
 import { PriorityOptions } from "@/types/PriorityOptions";
 import { Fragment } from "react";
+import { useCreateCard } from "../hooks/useCreateCard";
+import { IColumnWithCardsResponse } from "@/features/column/IColumn";
 
 
-export const AddCardDialog = ({ handleCreateTask, children }: {
-    handleCreateTask: (e: React.SubmitEvent<HTMLFormElement>) => void,
-    children: React.ReactNode
-}) => {
+type AddCardDialogProps = {
+    boardId: string,
+    columnsData: IColumnWithCardsResponse[] | undefined;
+    children: React.ReactNode;
+};
+
+export const AddCardDialog = ({ boardId, columnsData, children }: AddCardDialogProps) => {
+    // Mutations for updating/creating board, columns and card
+    const { mutate: createCardMutate, isPending: isCreatingCard, isError: isCreateCardError } = useCreateCard(boardId);
+
+    // Handle form submission for creating a new task
+    const handleCreateTask = async (e: React.SubmitEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        const formData = new FormData(e.currentTarget);
+        const targetColumn = columnsData?.[0];
+
+        if (!targetColumn || !formData.get("title")) return;
+
+        createCardMutate({
+            columnId: targetColumn.id,
+            title: formData.get("title") as string,
+            description: formData.get("description") as string || null,
+            assignee: formData.get("assignee") as string || null,
+            dueDate: formData.get("dueDate") as string || null,
+            priority: (Number(formData.get("priority")) as PriorityOptions) || undefined,
+            sortOrder: targetColumn.cards.length + 1 || 0, // New task will be added at the end
+        });
+
+        if (!isCreatingCard && !isCreateCardError) {
+            const trigger = document.querySelector('[data-state="open"]') as HTMLElement | null;
+            if (trigger) trigger.click();
+        }
+    }
+
     return (
         <Fragment>
             {/* Add Task Dialog */}

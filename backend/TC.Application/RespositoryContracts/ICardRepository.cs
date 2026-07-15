@@ -52,9 +52,9 @@ namespace TC.Application.RespositoryContracts
         /// </summary>
         /// <param name="cards">The list of cards to add.</param>
         /// <param name="cancellationToken">A token to cancel the operation.</param>
-        /// <returns>The number of state entries written to the database.</returns>
+        /// <returns>The list of added cards.</returns>
         /// <remarks> This method is intended to be used when adding default cards to a newly created column. </remarks>
-        Task<int> AddDefaultCardsToColumnAsync(List<Card> cards, CancellationToken cancellationToken = default);
+        Task<IEnumerable<Card>> AddDefaultCardsToColumnAsync(List<Card> cards, CancellationToken cancellationToken = default);
         #endregion
 
 
@@ -67,6 +67,15 @@ namespace TC.Application.RespositoryContracts
         /// <returns>The updated card.</returns>
         /// <remarks> This method is intended to be used when updating an existing card. </remarks>
         Task<Card> UpdateCardAsync(Card card, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Updates multiple cards asynchronously.
+        /// </summary>
+        /// <param name="cards">The list of cards to update.</param>
+        /// <param name="cancellationToken">A token to cancel the operation.</param>
+        /// <returns>The list of updated cards.</returns>
+        /// <remarks> This method is intended to be used when updating multiple cards at once. </remarks>
+        Task<IEnumerable<Card>> UpdateCardsBulkAsync(IEnumerable<Card> cards, CancellationToken cancellationToken = default);
         #endregion
 
 

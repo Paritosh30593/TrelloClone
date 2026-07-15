@@ -9,16 +9,15 @@ import { useDroppable } from "@dnd-kit/core";
 type ColumnProps = {
     column: IColumnWithCardsResponse;
     color: string;
-    onCreateTask: (e: React.SubmitEvent<HTMLFormElement>) => Promise<void>;
     children?: React.ReactNode;
     onEditColumn?: (column: IColumnWithCardsResponse) => void;
 };
 
-export const DroppableColumn = ({ column, color, children, onCreateTask, onEditColumn }: ColumnProps) => {
+export const DroppableColumn = ({ column, color, children, onEditColumn }: ColumnProps) => {
     const { setNodeRef, isOver, } = useDroppable({ id: column.id });
 
     return (
-        <div className={`w-full lg:shrink-0 lg:w-76 ${isOver ? "bg-purple-100 rounded-lg" : ""}`} ref={setNodeRef}>
+        <div className={`w-full lg:shrink-0 lg:w-75 ${isOver ? "bg-purple-100 rounded-lg" : ""}`} ref={setNodeRef}>
             <div className={`bg-white rounded-lg shadow-sm border`}>
                 {/* Column Header */}
                 <div className="p-3 sm:p-4 border-b">
@@ -43,7 +42,8 @@ export const DroppableColumn = ({ column, color, children, onCreateTask, onEditC
                     {children}
                 </div>
                 <hr />
-                <AddCardDialog handleCreateTask={onCreateTask}>
+
+                <AddCardDialog boardId={String(column.boardId)} columnsData={[column]}>
                     <DialogTrigger asChild>
                         <Button size="sm" variant="ghost" className="flex items-center gap-2 px-2 py-4 justify-center w-full text-gray-600 hover:bg-gray-100 rounded-b-lg">
                             <Plus className="w-4 h-4" />Add Task

@@ -24,6 +24,9 @@ namespace TC.WebAPI.StartupExtensions
             services.AddControllers();
             services.AddOpenApi();
 
+            // services.AddAuthentication("def").AddCookie("def");
+            // services.AddAuthorization();
+
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowFrontend", policy =>

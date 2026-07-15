@@ -9,35 +9,13 @@ namespace TC.WebAPI
     {
         private static void Main(string[] args)
         {
-            var builder = WebApplication.CreateBuilder(args);
-
+            // Create a WebApplicationBuilder instance
+            WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
             builder.Services.ConfigureServices(builder);
 
-            var app = builder.Build();
-
-            if (app.Environment.IsDevelopment())
-            {
-                app.MapOpenApi();
-                app.UseExceptionHandlingMiddleware();
-            }
-            else
-            {
-                app.UseExceptionHandlingMiddleware();
-            }
-
-            app.UseHsts();
-            app.UseHttpsRedirection();
-
-            app.UseCors("AllowFrontend");
-
-            app.UseSerilogRequestLogging();
-
-            app.UseAuthentication();
-            app.UseAuthorization();
-
-            app.MapControllers();
-
-            app.Run();
+            // Build the WebApplication instance
+            WebApplication app = builder.Build();
+            app.ConfigureApplications();
         }
     }
 }

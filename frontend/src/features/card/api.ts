@@ -11,8 +11,15 @@ export async function createCardApi(cardData: ICardAddRequest): Promise<ICardRes
 }
 
 export async function updateCardApi(cardData: ICardUpdateRequest): Promise<ICardResponse> {
-    const response = await axiApi.put(`/api/cards/${cardData.id}`, cardData);
+    const response = await axiApi.put(`/api/cards`, cardData);
     return response.status === HttpStatusCode.Ok
         ? response.data
         : {} as ICardResponse;
+}
+
+export async function updateCardsApi(cardsData: ICardUpdateRequest[]): Promise<ICardResponse[]> {
+    const response = await axiApi.put(`/api/cards/bulk`, cardsData);
+    return response.status === HttpStatusCode.Ok
+        ? response.data
+        : [] as ICardResponse[];
 }

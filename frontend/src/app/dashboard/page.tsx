@@ -33,7 +33,7 @@ export default function DashboardPage() {
     return (
         <Fragment>
             <Navbar />
-            <main className="container mx-auto px-4 py-6 sm:py-8">
+            <main className="container mx-auto py-6 sm:py-8">
                 <div className="mb-6 sm:mb-8">
                     <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-2">
                         Welcome back, {user?.firstName ?? user?.lastName ?? "User"}

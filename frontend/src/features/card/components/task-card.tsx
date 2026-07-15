@@ -4,10 +4,10 @@ import { Calendar, User } from "lucide-react";
 import { getPriorityColor } from "@/lib/utils";
 
 
-export const OverlayCard = ({ card }: { card: ICardResponse }) => {
+export const TaskCard = ({ card }: { card: ICardResponse }) => {
     return (
         <Card className="cursor-pointer hover:shadow-md transition-shadow duration-300">
-            <CardContent className="p-3 sm:p-4">
+            <CardContent className="py-0 px-3 sm:px-4">
                 <div className="space-y-2 sm:space-y-3">
                     {/* Task Header */}
                     <div className="flex items-start justify-between">

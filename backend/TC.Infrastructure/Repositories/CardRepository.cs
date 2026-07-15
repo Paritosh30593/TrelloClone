@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using TC.Application.RespositoryContracts;
 using TC.Domain.Entities;
 using TC.Infrastructure.DBContext;
@@ -45,11 +46,13 @@ namespace TC.Infrastructure.Repositories
             return await CreateAsync(card, cancellationToken);
         }
 
-        public async Task<int> AddDefaultCardsToColumnAsync(List<Card> cards, CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<Card>> AddDefaultCardsToColumnAsync(List<Card> cards, CancellationToken cancellationToken = default)
         {
             await _context.Card.AddRangeAsync(cards, cancellationToken);
 
-            return await _context.SaveChangesAsync(cancellationToken);
+            return await _context.SaveChangesAsync(cancellationToken) > 0
+                ? cards
+                : new List<Card>();
         }
         #endregion
 
@@ -58,6 +61,11 @@ namespace TC.Infrastructure.Repositories
         public async Task<Card> UpdateCardAsync(Card card, CancellationToken cancellationToken = default)
         {
             return await UpdateAsync(card, cancellationToken);
+        }
+
+        public async Task<IEnumerable<Card>> UpdateCardsBulkAsync(IEnumerable<Card> cards, CancellationToken cancellationToken = default)
+        {
+            return await UpdateRangeAsync(cards, cancellationToken);
         }
         #endregion
 

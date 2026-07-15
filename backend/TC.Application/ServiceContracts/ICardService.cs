@@ -55,7 +55,7 @@ namespace TC.Application.ServiceContracts
         /// <param name="cancellationToken">A cancellation token.</param>
         /// <returns>A list of <see cref="CardResponse"/> objects.</returns>
         /// <remarks> This method is intended to be used when a new column is created, and it will add default cards to that column. </remarks>
-        Task<int> AddDefaultCardsToColumnAsync(int columnId, CancellationToken cancellationToken = default);
+        Task<List<CardResponse>> AddDefaultCardsToColumnAsync(int columnId, CancellationToken cancellationToken = default);
         #endregion
 
 
@@ -68,6 +68,15 @@ namespace TC.Application.ServiceContracts
         /// <returns>A <see cref="CardResponse"/> object.</returns>
         /// <remarks> This method is intended to be used when an existing card needs to be updated with new information. </remarks>
         Task<CardResponse> UpdateCardAsync(CardUpdateRequest cardRequest, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Updates multiple cards asynchronously.
+        /// </summary>
+        /// <param name="cardRequests">The list of card update requests.</param>
+        /// <param name="cancellationToken">A cancellation token.</param>
+        /// <returns>A list of <see cref="CardResponse"/> objects.</returns>
+        /// <remarks> This method is intended to be used when multiple cards need to be updated. </remarks>
+        Task<List<CardResponse>> UpdateCardsBulkAsync(List<CardUpdateRequest> cardRequests, CancellationToken cancellationToken = default);
         #endregion
 
 
@@ -77,7 +86,7 @@ namespace TC.Application.ServiceContracts
         /// </summary>
         /// <param name="id">The ID of the card.</param>
         /// <param name="cancellationToken">A cancellation token.</param>
-        /// <returns>A <see cref="CardResponse"/> object.</returns>
+        /// <returns>A boolean indicating whether the card was successfully deleted.</returns>
         /// <remarks> This method is intended to be used when an existing card needs to be removed from the system. </remarks>
         Task<bool> DeleteCardAsync(int id, CancellationToken cancellationToken = default);
         #endregion

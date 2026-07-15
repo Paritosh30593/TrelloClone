@@ -69,7 +69,7 @@ namespace TC.Application.Services
             return card.ToCardResponse();
         }
 
-        public async Task<int> AddDefaultCardsToColumnAsync(int columnId, CancellationToken cancellationToken = default)
+        public async Task<List<CardResponse>> AddDefaultCardsToColumnAsync(int columnId, CancellationToken cancellationToken = default)
         {
             if (columnId <= 0)
             {
@@ -85,7 +85,9 @@ namespace TC.Application.Services
                 }.ToCard())
                 .ToList();
 
-            return await _cardRepository.AddDefaultCardsToColumnAsync(defaultCards, cancellationToken);
+            return (await _cardRepository.AddDefaultCardsToColumnAsync(defaultCards, cancellationToken))
+                .Select(c => c.ToCardResponse())
+                .ToList();
         }
         #endregion
 
@@ -104,6 +106,20 @@ namespace TC.Application.Services
                 ?? throw new InvalidOperationException("Card cannot be null.");
 
             return card.ToCardResponse();
+        }
+
+        public async Task<List<CardResponse>> UpdateCardsBulkAsync(List<CardUpdateRequest> cardRequests, CancellationToken cancellationToken = default)
+        {
+            if (cardRequests == null || cardRequests.Count == 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(cardRequests), "Card requests list cannot be empty.");
+            }
+
+            IEnumerable<Card> cards = cardRequests.Select(cr => cr.ToCard());
+
+            return (await _cardRepository.UpdateCardsBulkAsync(cards, cancellationToken))
+                .Select(c => c.ToCardResponse())
+                .ToList();
         }
         #endregion
 
