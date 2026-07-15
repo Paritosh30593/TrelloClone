@@ -1,0 +1,15 @@
+.ToggleGroup {
+  display: inline-flex;
+}
+.ToggleGroupItem {
+  /* width: max-content; */
+  width: 100%;
+  display: flex;
+  line-height: 1;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+.ToggleGroupItem:focus {
+  position: relative;
+}

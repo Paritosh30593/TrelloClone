@@ -1,23 +1,21 @@
-var builder = WebApplication.CreateBuilder(args);
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Hosting;
+using Serilog;
+using TC.WebAPI.StartupExtensions;
 
-// Add services to the container.
-
-builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
-
-var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+namespace TC.WebAPI
 {
-    app.MapOpenApi();
+    public partial class Program
+    {
+        private static void Main(string[] args)
+        {
+            // Create a WebApplicationBuilder instance
+            WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+            builder.Services.ConfigureServices(builder);
+
+            // Build the WebApplication instance
+            WebApplication app = builder.Build();
+            app.ConfigureApplications();
+        }
+    }
 }
-
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
-app.MapControllers();
-
-app.Run();

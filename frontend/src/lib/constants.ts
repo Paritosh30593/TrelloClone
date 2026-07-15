@@ -1,0 +1,21 @@
+// Add tailwind color classes for board colors atleast 12
+export const BOARD_COLORS = [
+    "red-500",
+    "orange-500",
+    "yellow-500",
+    "green-500",
+    "teal-500",
+    "blue-500",
+    "indigo-500",
+    "purple-500",
+    "pink-500",
+    "red-700",
+    "orange-700",
+    "yellow-700",
+    "green-700",
+    "teal-700",
+    "blue-700",
+    "indigo-700",
+    "purple-700",
+    "pink-700",
+];
