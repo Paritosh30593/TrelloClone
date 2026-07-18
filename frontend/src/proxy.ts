@@ -6,19 +6,31 @@ const isDev = process.env.NODE_ENV === 'development';
 const isPublicRoute = createRouteMatcher([
     '/',
     '/sign-in(.*)',
-    '/sign-up(.*)'
+    '/sign-up(.*)',
+    '/forgot-password(.*)',
+    '/reset-password(.*)'
+]);
+
+const isAccessDeniedRoute = createRouteMatcher([
+    '/unauthorized(.*)',
+    '/forbidden(.*)',
 ]);
 
 export default clerkMiddleware(async (auth, req: NextRequest) => {
     const { userId, redirectToSignIn } = await auth();
     const isPublic = isPublicRoute(req);
+    const isAccessDenied = isAccessDeniedRoute(req);
+
+    if (userId && userId !== "user_3ERh5RTe2wMLi97eVnynpW8nQ3y" && !isAccessDenied) {
+        return NextResponse.redirect(new URL('/unauthorized', req.url));
+    }
 
     if (isDev) {
         console.log("***============== Running in development mode. Skipping authentication checks. ==============***");
         if (!userId && !isPublic) {
             return redirectToSignIn();
         }
-        if (userId && isPublic) {
+        else if (userId && isPublic && !isAccessDenied) {
             return NextResponse.redirect(new URL('/dashboard', req.url));
         }
     }
@@ -27,7 +39,7 @@ export default clerkMiddleware(async (auth, req: NextRequest) => {
         if (!userId && !isPublic) {
             return redirectToSignIn();
         }
-        if (userId && isPublic) {
+        else if (userId && isPublic && !isAccessDenied) {
             return NextResponse.redirect(new URL('/dashboard', req.url));
         }
     }

@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Button } from "../ui/button";
 import { usePathname } from "next/navigation";
 import { Badge } from "../ui/badge";
+import { useFetchEnvUser } from "@/hooks/useFetchEnvUser";
 
 type NavbarProps = {
     boardTitle?: string;
@@ -15,7 +16,8 @@ type NavbarProps = {
 };
 
 export const Navbar = ({ boardTitle, setIsEditingTitle, onFilterClick, filterCount = 0 }: NavbarProps) => {
-    const { isSignedIn } = useUser();
+    //const { isSignedIn } = useUser();
+    const { isSignedIn } = useFetchEnvUser();
     const pathname = usePathname();
 
     const isDashboardPage = pathname === "/dashboard" && isSignedIn;

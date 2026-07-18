@@ -62,8 +62,11 @@ export const UpdateBoardDialog = ({ editTitleState, editFormState, boardData }: 
                                 name="board-title"
                                 placeholder="Enter board title"
                                 value={editForm.title}
-                                onChange={(e) => setEditForm(prev => ({ ...prev, title: e.target.value }))}
                                 className="mt-1 block w-full rounded-sm focus:border-purple-500 focus:ring-purple-500 sm:text-sm"
+                                onChange={(e) => setEditForm(prev => ({
+                                    ...prev,
+                                    title: e.target.value
+                                }))}
                             />
                         </div>
                         <div className="space-y-1">
@@ -73,8 +76,11 @@ export const UpdateBoardDialog = ({ editTitleState, editFormState, boardData }: 
                                 name="board-description"
                                 placeholder="Enter board description"
                                 value={editForm.description ?? ""}
-                                onChange={(e) => setEditForm(prev => ({ ...prev, description: e.target.value }))}
                                 className="mt-1 block w-full rounded-sm focus:border-purple-500 focus:ring-purple-500 sm:text-sm"
+                                onChange={(e) => setEditForm(prev => ({
+                                    ...prev,
+                                    description: e.target.value
+                                }))}
                             />
                         </div>
                         <div className="space-y-2">
@@ -84,11 +90,11 @@ export const UpdateBoardDialog = ({ editTitleState, editFormState, boardData }: 
                                     BOARD_COLORS.map((color) => (
                                         <button
                                             type="button"
-                                            key={`bg-${color}`}
-                                            onClick={() => setEditForm(prev => ({ ...prev, color: `bg-${color}` }))}
-                                            className={`w-8 h-8 rounded-full bg-${color} 
-                                                    ${`bg-${color}` === editForm.color
-                                                    ? `ring-2 ring-offset-2 ring-${color}`
+                                            key={color.bgcode}
+                                            onClick={() => setEditForm(prev => ({ ...prev, color: color.bgcode }))}
+                                            className={`w-8 h-8 rounded-full ${color.bgcode} 
+                                                ${color.bgcode === editForm.color
+                                                    ? `ring-2 ring-offset-2 ${color.rgcode}`
                                                     : ""
                                                 }`
                                             }
@@ -99,7 +105,7 @@ export const UpdateBoardDialog = ({ editTitleState, editFormState, boardData }: 
                         </div>
                         <div className="flex justify-end space-x-2 mt-8">
                             <Button type="button" size="lg" variant="outline" onClick={() => setIsEditingTitle(false)}>Cancel</Button>
-                            <Button type="submit" size="lg" className="bg-purple-500">Save Changes</Button>
+                            <Button type="submit" size="lg" className="ui-btn-style">Save Changes</Button>
                         </div>
                     </form>
                 </DialogContent>
