@@ -1,0 +1,11 @@
+{
+  "configurations": [
+    {
+      "name": "C#: TC.WebAPI [https]",
+      "type": "dotnet",
+      "request": "launch",
+      "projectPath": "${workspaceFolder}\\TC.WebAPI\\TC.WebAPI.csproj",
+      "launchConfigurationId": "TargetFramework=;https"
+    }
+  ]
+}

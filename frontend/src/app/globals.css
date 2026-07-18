@@ -37,6 +37,9 @@
   --sidebar-ring: oklch(0.708 0 0);
   --button-color: oklch(55.8% 0.288 302.321);
   --button-text-color: oklch(99.2% 0.005 0);
+  --ui-button-color: oklch(62.17% 0.25898 305.305);
+  --ui-button-text-color: oklch(99.2% 0.005 0);
+  --ui-button-hover-color: oklch(55.8% 0.288 302.321 / 0.8);
 }
 
 .dark {
@@ -73,6 +76,9 @@
   --sidebar-ring: oklch(0.556 0 0);
   --button-color: oklch(55.8% 0.288 302.321);
   --button-text-color: oklch(99.2% 0.005 0);
+  --ui-button-color: oklch(62.17% 0.25898 305.305);
+  --ui-button-text-color: oklch(99.2% 0.005 0);
+  --ui-button-hover-color: oklch(55.8% 0.288 302.321 / 0.8);
 }
 
 @theme inline {
@@ -111,6 +117,14 @@
 .nav-btn-style {
   background-color: var(--button-color);
   color: var(--button-text-color);
+}
+
+.ui-btn-style {
+  background-color: var(--ui-button-color);
+  color: var(--ui-button-text-color);
+}
+.ui-btn-style:hover {
+  background-color: var(--ui-button-hover-color);
 }
 
 .req {

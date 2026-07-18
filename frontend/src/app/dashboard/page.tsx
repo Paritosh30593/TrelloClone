@@ -8,15 +8,35 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { useCreateBoard } from "@/features/board/hooks/useCreateBoard";
 import { useUserBoards } from "@/features/board/hooks/useUserBoards";
-import { useUser } from "@clerk/nextjs";
 import { ClockFading, Filter, Grid3X3, Kanban, List, Plus, Rocket, Search } from "lucide-react";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
+import { useFetchEnvUser } from "@/hooks/useFetchEnvUser";
+import { FilterBoardsDialog } from "@/features/board/components/filter-boards-dialog";
+import { IBoardResponse } from "@/features/board/IBoard";
 
 export default function DashboardPage() {
-    const { user } = useUser();
+    const { user } = useFetchEnvUser();
     const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
+    const [isFilteringBoards, setIsFilteringBoards] = useState(false);
+    const [filterCount, setFilterCount] = useState(0);
 
-    const { data: userBoards, error: fetchBoardsError, isPending: isFetchingBoards, isError: isFetchBoardsError } = useUserBoards(user?.id);
+    const {
+        data: userBoards,
+        error: fetchBoardsError,
+        isPending: isFetchingBoards,
+        isError: isFetchBoardsError
+    } = useUserBoards(user?.id);
+
+    const [boards, setBoards] = useState<IBoardResponse[]>([]);
+    useEffect(() => {
+        const boardSetter = () => {
+            if (userBoards) {
+                setBoards(userBoards);
+            }
+        }
+        boardSetter();
+    }, [userBoards]);
+
     const { mutate: createBoardMutate } = useCreateBoard();
 
     const handleCreateBoard = () => {
@@ -30,10 +50,29 @@ export default function DashboardPage() {
         });
     }
 
+    const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const searchTerm = e.target.value.toLowerCase();
+        const filteredBoards = userBoards?.filter(board =>
+            board.title.toLowerCase().includes(searchTerm)
+            || (board.description != null && board.description
+                .toLowerCase()
+                .includes(searchTerm)))
+            ?? [];
+        setBoards(filteredBoards);
+    }
+
     return (
         <Fragment>
             <Navbar />
-            <main className="container mx-auto py-6 sm:py-8">
+
+            <FilterBoardsDialog
+                userId={user?.id ?? ""}
+                filterState={[isFilteringBoards, setIsFilteringBoards]}
+                setBoards={setBoards}
+                setFilterCount={setFilterCount} />
+
+            {/* Boards List */}
+            <main className="container mx-auto p-6 sm:py-8">
                 <div className="mb-6 sm:mb-8">
                     <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-2">
                         Welcome back, {user?.firstName ?? user?.lastName ?? "User"}
@@ -42,7 +81,13 @@ export default function DashboardPage() {
                         Here&apos;s what&apos;s happening with your boards today:
                     </p>
 
-                    <Button className="w-full sm:w-auto mt-2" onClick={handleCreateBoard}><Plus className="h-4 w-4 mr-2" />Create Board</Button>
+                    <Button
+                        size="lg"
+                        className="w-full sm:w-auto mt-2 ui-btn-style"
+                        onClick={handleCreateBoard}
+                    >
+                        <Plus className="h-4 w-4 mr-2" />Create Board
+                    </Button>
                 </div>
 
                 {/* Stats */}
@@ -52,7 +97,7 @@ export default function DashboardPage() {
                             <div className="flex items-center justify-between">
                                 <div>
                                     <p className="text-xs sm:text-sm font-medium text-gray-600">Total Boards</p>
-                                    <p className="text-xl sm:text-2xl font-bold text-gray-900">{userBoards?.length}</p>
+                                    <p className="text-xl sm:text-2xl font-bold text-gray-900">{boards?.length}</p>
                                 </div>
                                 <div className="h-10 w-10 sm:h-12 sm:w-12 bg-purple-100 p-2 rounded-lg flex items-center justify-center">
                                     <Kanban className="h-5 w-5 sm:h-6 sm:w-6 text-purple-600" />
@@ -67,7 +112,7 @@ export default function DashboardPage() {
                             <div className="flex items-center justify-between">
                                 <div>
                                     <p className="text-xs sm:text-sm font-medium text-gray-600">Active Projects</p>
-                                    <p className="text-xl sm:text-2xl font-bold text-gray-900">{userBoards?.length}</p>
+                                    <p className="text-xl sm:text-2xl font-bold text-gray-900">{boards?.length}</p>
                                 </div>
                                 <div className="h-10 w-10 sm:h-12 sm:w-12 bg-green-100 p-2 rounded-lg flex items-center justify-center">
                                     <Rocket className="h-5 w-5 sm:h-6 sm:w-6 text-green-600" />
@@ -82,7 +127,7 @@ export default function DashboardPage() {
                             <div className="flex items-center justify-between">
                                 <div>
                                     <p className="text-xs sm:text-sm font-medium text-gray-600">Recent Activity</p>
-                                    <p className="text-xl sm:text-2xl font-bold text-gray-900">{userBoards?.filter(board => {
+                                    <p className="text-xl sm:text-2xl font-bold text-gray-900">{boards?.filter(board => {
                                         const updatedAt = new Date(board.updatedAt);
                                         const now = new Date();
                                         now.setDate(now.getDate() - 7);
@@ -97,19 +142,19 @@ export default function DashboardPage() {
                     </Card>
 
 
-                    <Card>
+                    {/* <Card>
                         <CardContent className="p-4 sm:p-6">
                             <div className="flex items-center justify-between">
                                 <div>
                                     <p className="text-xs sm:text-sm font-medium text-gray-600">Total Boards</p>
-                                    <p className="text-xl sm:text-2xl font-bold text-gray-900">{userBoards?.length ?? 0}</p>
+                                    <p className="text-xl sm:text-2xl font-bold text-gray-900">{boards?.length ?? 0}</p>
                                 </div>
                                 <div className="h-10 w-10 sm:h-12 sm:w-12 bg-purple-100 p-2 rounded-lg flex items-center justify-center">
                                     <Kanban className="h-5 w-5 sm:h-6 sm:w-6 text-purple-600" />
                                 </div>
                             </div>
                         </CardContent>
-                    </Card>
+                    </Card> */}
                 </div>
 
 
@@ -120,30 +165,38 @@ export default function DashboardPage() {
                             <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-2">Your Boards</h2>
                             <p className="text-gray-600">Manage your tasks and projects.</p>
                         </div>
-                        <div className="flex flex-col sm:flex-row items-stretch sm:items-center space-y-2 sm:space-y-0">
-                            <div className="flex items-center bg-white space-x-2 border p-1 rounded-md">
+                        <div className="flex flex-col sm:flex-row items-stretch sm:items-center space-y-2 sm:space-y-0 sm:space-x-2">
+                            <div className="flex items-center bg-white space-x-2 border p-1 rounded-lg">
                                 <Button
                                     size="sm"
-                                    variant={viewMode === "grid" ? "default" : "ghost"}
-                                    onClick={() => setViewMode("grid")}>
+                                    onClick={() => setViewMode("grid")}
+                                    className={`${viewMode === "grid" ? "ui-btn-style" : "bg-white text-purple-700 hover:bg-purple-100"}`}>
                                     <Grid3X3 className="h-4 w-4" />
                                 </Button>
                                 <Button
                                     size="sm"
-                                    variant={viewMode === "list" ? "default" : "ghost"}
-                                    onClick={() => setViewMode("list")}>
+                                    onClick={() => setViewMode("list")}
+                                    className={`${viewMode === "list" ? "ui-btn-style" : "bg-white text-purple-700 hover:bg-purple-100"}`}>
                                     <List className="h-4 w-4" />
                                 </Button>
                             </div>
                             <Button
                                 variant="secondary"
-                                size="sm">
-                                <Filter className="h-4 w-4 mr-2" />Filter
+                                size="lg"
+                                onClick={() => setIsFilteringBoards(true)}>
+                                <Filter className="h-4 w-4 mr-2" />
+                                <span className="hidden sm:inline">Filter</span>
+                                {
+                                    filterCount > 0 && (
+                                        <Badge className="ml-1 sm:ml-2 ui-btn-style p-1.5 text-2xs sm:text-xs">{filterCount}</Badge>
+                                    )
+                                }
                             </Button>
 
                             <Button
-                                size="sm"
-                                onClick={handleCreateBoard}>
+                                size="lg"
+                                onClick={handleCreateBoard}
+                                className="ui-btn-style">
                                 <Plus className="h-4 w-4 mr-2" />Create Board
                             </Button>
                         </div>
@@ -158,6 +211,7 @@ export default function DashboardPage() {
                             type="text"
                             placeholder="Search boards..."
                             className="pl-10"
+                            onChange={handleSearchChange}
                         />
                     </div>
 
@@ -167,7 +221,7 @@ export default function DashboardPage() {
                             <p>Loading boards...</p>
                             : isFetchBoardsError
                                 ? <p>Error fetching boards: {fetchBoardsError?.message}</p>
-                                : (userBoards?.length ?? 0) === 0
+                                : (boards?.length ?? 0) === 0
                                     ? (
                                         <div className="text-center py-10">
                                             <p className="text-gray-600 mb-4">You have no boards yet. Create your first board to get started!</p>
@@ -177,10 +231,10 @@ export default function DashboardPage() {
                                     : (
                                         <div className={`grid ${viewMode === "grid"
                                             ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6"
-                                            : "grid-cols-1 gap-2"}`
+                                            : "grid-cols-1 gap-4 sm:gap-6"}`
                                         }>
                                             {
-                                                userBoards?.map((board) => (
+                                                boards?.map((board) => (
                                                     <Link href={`/boards/${board.id}`} key={board.id} className="no-underline">
                                                         <Card className="hover:shadow-lg transition-shadow cursor-pointer group">
                                                             <CardHeader className="pb-2">

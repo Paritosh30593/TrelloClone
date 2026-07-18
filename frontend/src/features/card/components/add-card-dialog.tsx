@@ -83,9 +83,24 @@ export const AddCardDialog = ({ boardId, columnsData, children }: AddCardDialogP
                                         <SelectValue placeholder="Select priority" />
                                     </SelectTrigger>
                                     <SelectContent className="w-full">
-                                        <SelectItem key={PriorityOptions.Low} value={String(PriorityOptions.Low)}>{nameof<typeof PriorityOptions>("Low")}</SelectItem>
-                                        <SelectItem key={PriorityOptions.Medium} value={String(PriorityOptions.Medium)}>{nameof<typeof PriorityOptions>("Medium")}</SelectItem>
-                                        <SelectItem key={PriorityOptions.High} value={String(PriorityOptions.High)}>{nameof<typeof PriorityOptions>("High")}</SelectItem>
+                                        <SelectItem
+                                            key={PriorityOptions.Low}
+                                            value={String(PriorityOptions.Low)}
+                                        >
+                                            {nameof<typeof PriorityOptions>("Low")}
+                                        </SelectItem>
+                                        <SelectItem
+                                            key={PriorityOptions.Medium}
+                                            value={String(PriorityOptions.Medium)}
+                                        >
+                                            {nameof<typeof PriorityOptions>("Medium")}
+                                        </SelectItem>
+                                        <SelectItem
+                                            key={PriorityOptions.High}
+                                            value={String(PriorityOptions.High)}
+                                        >
+                                            {nameof<typeof PriorityOptions>("High")}
+                                        </SelectItem>
                                     </SelectContent>
                                 </Select>
                             </div>
@@ -96,7 +111,7 @@ export const AddCardDialog = ({ boardId, columnsData, children }: AddCardDialogP
                             </div>
                         </div>
                         <div className="flex justify-end space-x-2 mt-8">
-                            <Button type="submit" size="lg" className="bg-purple-500">Create Task</Button>
+                            <Button type="submit" size="lg" className="ui-btn-style">Create Task</Button>
                         </div>
                     </form>
                 </DialogContent>

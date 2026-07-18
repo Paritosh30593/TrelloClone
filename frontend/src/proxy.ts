@@ -15,12 +15,12 @@ export default clerkMiddleware(async (auth, req: NextRequest) => {
 
     if (isDev) {
         console.log("***============== Running in development mode. Skipping authentication checks. ==============***");
-        if (!userId && !isPublic) {
-            return redirectToSignIn();
-        }
-        if (userId && isPublic) {
-            return NextResponse.redirect(new URL('/dashboard', req.url));
-        }
+        // if (!userId && !isPublic) {
+        //     return redirectToSignIn();
+        // }
+        // if (userId && isPublic) {
+        //     return NextResponse.redirect(new URL('/dashboard', req.url));
+        // }
     }
     else {
         console.log("***============== Running in production mode. Performing authentication checks. ==============***");
