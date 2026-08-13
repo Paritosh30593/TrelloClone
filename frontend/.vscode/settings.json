@@ -1,0 +1,7 @@
+{
+    "appService.zipIgnorePattern": [
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/19c5b377-6a13-49a3-a78f-e792b71ebbf1/resourceGroups/rg-trelloclone-dev-westus-01/providers/Microsoft.Web/sites/app-trelloclone-fe-dev-westus-01",
+    "appService.deploySubpath": "build"
+}
