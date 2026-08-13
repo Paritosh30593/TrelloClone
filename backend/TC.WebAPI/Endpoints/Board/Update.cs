@@ -4,9 +4,11 @@ using Ardalis.ApiEndpoints;
 using Microsoft.AspNetCore.Mvc;
 using TC.Application.DTO.BoardDTO;
 using TC.Application.ServiceContracts;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TC.WebAPI.Endpoints.Board
 {
+    [Authorize]
     [Route("api/boards")]
     public class Update(IBoardService boardService)
     : EndpointBaseAsync

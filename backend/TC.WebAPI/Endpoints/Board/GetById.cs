@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using TC.Application.DTO.BoardDTO;
 using TC.Application.ServiceContracts;
 using Ardalis.ApiEndpoints;
@@ -7,6 +8,7 @@ using System.Threading;
 
 namespace TC.WebAPI.Endpoints.Board
 {
+    [Authorize]
     [Route("api/boards")]
     public class GetById(IBoardService boardService)
     : EndpointBaseAsync

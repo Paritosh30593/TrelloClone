@@ -1,0 +1,4 @@
+{
+  "appService.defaultWebAppToDeploy": "/subscriptions/19c5b377-6a13-49a3-a78f-e792b71ebbf1/resourceGroups/rg-trelloclone-dev-westus-01/providers/Microsoft.Web/sites/app-trelloclone-dev-be-westus-01",
+  "appService.deploySubpath": "publish"
+}

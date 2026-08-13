@@ -1,4 +1,4 @@
-using Microsoft.Data.Sqlite;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,9 +16,10 @@ namespace TC.Infrastructure
         {
             // Add infrastructure services here
             var connection = configuration.GetConnectionString("TC");
-            services.AddDbContext<TrelloCloneDBContext>(options => options.UseSqlite(connection));
+            services.AddDbContext<TrelloCloneDBContext>(options => options.UseSqlServer(connection));
+
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped<IDapperUnitOfWork>(provider => new DapperUnitOfWork(SqliteFactory.Instance, connection));
+            services.AddScoped<IDapperUnitOfWork>(provider => new DapperUnitOfWork(SqlClientFactory.Instance, connection));
             services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
 
             #region Repository

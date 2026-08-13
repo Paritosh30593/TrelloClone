@@ -1,12 +1,14 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Ardalis.ApiEndpoints;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TC.Application.DTO.BoardDTO;
 using TC.Application.ServiceContracts;
 
 namespace TC.WebAPI.Endpoints.Board
 {
+    [Authorize]
     [Route("api/boards")]
     public class Add(IBoardService boardService)
     : EndpointBaseAsync

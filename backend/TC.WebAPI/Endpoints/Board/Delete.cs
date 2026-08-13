@@ -2,10 +2,12 @@ using System.Threading;
 using System.Threading.Tasks;
 using Ardalis.ApiEndpoints;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using TC.Application.ServiceContracts;
 
 namespace TC.WebAPI.Endpoints.Board
 {
+    [Authorize]
     [Route("api/boards")]
     public class Delete(IBoardService boardService)
     : EndpointBaseAsync
