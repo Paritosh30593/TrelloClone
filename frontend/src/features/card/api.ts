@@ -4,21 +4,21 @@ import axiApi from "@/lib/api/httpClient";
 
 
 export async function createCardApi(cardData: ICardAddRequest): Promise<ICardResponse> {
-    const response = await axiApi.post(`/api/cards`, cardData);
+    const response = await axiApi.post(`cards`, cardData);
     return response.status === HttpStatusCode.Ok
         ? response.data
         : {} as ICardResponse;
 }
 
 export async function updateCardApi(cardData: ICardUpdateRequest): Promise<ICardResponse> {
-    const response = await axiApi.put(`/api/cards`, cardData);
+    const response = await axiApi.put(`cards`, cardData);
     return response.status === HttpStatusCode.Ok
         ? response.data
         : {} as ICardResponse;
 }
 
 export async function updateCardsApi(cardsData: ICardUpdateRequest[]): Promise<ICardResponse[]> {
-    const response = await axiApi.put(`/api/cards/bulk`, cardsData);
+    const response = await axiApi.put(`cards/bulk`, cardsData);
     return response.status === HttpStatusCode.Ok
         ? response.data
         : [] as ICardResponse[];

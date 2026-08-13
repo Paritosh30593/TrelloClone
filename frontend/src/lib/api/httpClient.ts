@@ -1,7 +1,12 @@
 import axios from "axios";
 import { ApiError } from "next/dist/server/api-utils";
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://localhost:5002";
+//const isProduction = process.env.NODE_ENV === "production";
+//isProduction
+const configuredBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+const API_BASE_URL = configuredBaseUrl
+    ? configuredBaseUrl
+    : "http://localhost:5002/api/";
 
 const axiApi = axios.create({ baseURL: API_BASE_URL });
 
