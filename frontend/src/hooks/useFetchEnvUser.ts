@@ -1,20 +1,19 @@
-import { useUser } from "@clerk/nextjs";
+import { useMsal } from "@azure/msal-react";
 
 export const useFetchEnvUser = () => {
-    const { user: prodUser, isSignedIn: isProdSignedIn } = useUser();
-    const devUser = {
-        id: "user_3ERh5RTe2wMLi97eVnynpW8nQ3y",
-        firstName: "Paritosh",
-        lastName: "Desai"
-    };
+    const { accounts } = useMsal();
+    const account = accounts[0];
 
-    return process.env.NODE_ENV === "production"
-        ? {
-            isSignedIn: isProdSignedIn,
-            user: prodUser
+    if (!account) {
+        return { isSignedIn: false, user: null };
+    }
+
+    return {
+        isSignedIn: true,
+        user: {
+            id: account.localAccountId,
+            firstName: account.name?.split(" ")[0] ?? "",
+            lastName: account.name?.split(" ").slice(1).join(" ") ?? ""
         }
-        : {
-            isSignedIn: true,
-            user: devUser
-        };
+    };
 };

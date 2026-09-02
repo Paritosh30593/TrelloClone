@@ -140,21 +140,6 @@ export default function DashboardPage() {
                             </div>
                         </CardContent>
                     </Card>
-
-
-                    {/* <Card>
-                        <CardContent className="p-4 sm:p-6">
-                            <div className="flex items-center justify-between">
-                                <div>
-                                    <p className="text-xs sm:text-sm font-medium text-gray-600">Total Boards</p>
-                                    <p className="text-xl sm:text-2xl font-bold text-gray-900">{boards?.length ?? 0}</p>
-                                </div>
-                                <div className="h-10 w-10 sm:h-12 sm:w-12 bg-purple-100 p-2 rounded-lg flex items-center justify-center">
-                                    <Kanban className="h-5 w-5 sm:h-6 sm:w-6 text-purple-600" />
-                                </div>
-                            </div>
-                        </CardContent>
-                    </Card> */}
                 </div>
 
 

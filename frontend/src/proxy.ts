@@ -1,58 +1,33 @@
-import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
 import { NextRequest, NextResponse } from 'next/server';
 
-// const isDev = process.env.NODE_ENV === 'development';
+const PUBLIC_ROUTES = ['/', '/unauthorized', '/forbidden', '/signin-oidc'];
 
-// const isPublicRoute = createRouteMatcher([
-//     '/',
-//     '/sign-in(.*)',
-//     '/sign-up(.*)',
-//     '/forgot-password(.*)',
-//     '/reset-password(.*)'
-// ]);
+function isPublicRoute(pathname: string): boolean {
+    return PUBLIC_ROUTES.some(route =>
+        pathname === route || pathname.startsWith(route + '/')
+    );
+}
 
-// const isAccessDeniedRoute = createRouteMatcher([
-//     '/unauthorized(.*)',
-//     '/forbidden(.*)',
-// ]);
+export function proxy(req: NextRequest) {
+    const { pathname } = req.nextUrl;
+    const isAuthenticated = req.cookies.has('msal.session');
 
-// export default clerkMiddleware(async (auth, req: NextRequest) => {
-//     const { userId, redirectToSignIn } = await auth();
-//     const isPublic = isPublicRoute(req);
-//     const isAccessDenied = isAccessDeniedRoute(req);
+    console.log(`Proxy middleware: pathname=${pathname}, isAuthenticated=${isAuthenticated}`);
 
-//     if (userId && userId !== "user_3ERh5RTe2wMLi97eVnynpW8nQ3y" && !isAccessDenied) {
-//         return NextResponse.redirect(new URL('/unauthorized', req.url));
-//     }
+    if (!isAuthenticated && !isPublicRoute(pathname)) {
+        return NextResponse.redirect(new URL('/', req.url));
+    }
 
-//     if (isDev) {
-//         console.log("***============== Running in development mode. Skipping authentication checks. ==============***");
-//         if (!userId && !isPublic) {
-//             return redirectToSignIn();
-//         }
-//         else if (userId && isPublic && !isAccessDenied) {
-//             return NextResponse.redirect(new URL('/dashboard', req.url));
-//         }
-//     }
-//     else {
-//         console.log("***============== Running in production mode. Performing authentication checks. ==============***");
-//         if (!userId && !isPublic) {
-//             return redirectToSignIn();
-//         }
-//         else if (userId && isPublic && !isAccessDenied) {
-//             return NextResponse.redirect(new URL('/dashboard', req.url));
-//         }
-//     }
-//     return NextResponse.next();
-// });
+    if (isAuthenticated && pathname === '/') {
+        return NextResponse.redirect(new URL('/dashboard', req.url));
+    }
+
+    return NextResponse.next();
+}
 
 export const config = {
     matcher: [
-        // Skip Next.js internals and all static files, unless found in search params
         '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
-        // Always run for API routes
         '/(api|trpc)(.*)',
-        // Always run for Clerk-specific frontend API routes
-        '/__clerk/(.*)',
     ],
-}
+};

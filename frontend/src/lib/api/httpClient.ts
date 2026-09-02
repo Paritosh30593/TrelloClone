@@ -1,14 +1,41 @@
 import axios from "axios";
 import { ApiError } from "next/dist/server/api-utils";
+import { InteractionRequiredAuthError } from "@azure/msal-browser";
+import { msalInstance } from "@/providers/msal-provider";
+import { protectedResources } from "@/authConfig";
 
-//const isProduction = process.env.NODE_ENV === "production";
-//isProduction
 const configuredBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 const API_BASE_URL = configuredBaseUrl
     ? configuredBaseUrl
     : "http://localhost:5002/api/";
 
 const axiApi = axios.create({ baseURL: API_BASE_URL });
+
+axiApi.interceptors.request.use(async (config) => {
+    await msalInstance.initialize();
+    const account = msalInstance.getActiveAccount() ?? msalInstance.getAllAccounts()[0];
+    if (!account)
+        return config;
+
+    try {
+        const tokenResponse = await msalInstance.acquireTokenSilent({
+            scopes: protectedResources.api.scopes,
+            account,
+        });
+        config.headers.Authorization = `Bearer ${tokenResponse.accessToken}`;
+    }
+    catch (error) {
+        if (error instanceof InteractionRequiredAuthError) {
+            await msalInstance.acquireTokenRedirect({
+                scopes: protectedResources.api.scopes
+            });
+        }
+        else {
+            console.error("[httpClient] acquireTokenSilent failed:", error);
+        }
+    }
+    return config;
+});
 
 axiApi.interceptors.response.use(
     response => response,

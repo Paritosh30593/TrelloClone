@@ -5,7 +5,8 @@ import Link from "next/link";
 import { Button } from "../ui/button";
 import { usePathname } from "next/navigation";
 import { Badge } from "../ui/badge";
-import { useFetchEnvUser } from "@/hooks/useFetchEnvUser";
+import { AuthenticatedTemplate, UnauthenticatedTemplate, useMsal } from "@azure/msal-react";
+import { loginRequest } from "@/authConfig";
 
 type NavbarProps = {
     boardTitle?: string;
@@ -15,12 +16,25 @@ type NavbarProps = {
 };
 
 export const Navbar = ({ boardTitle, setIsEditingTitle, onFilterClick, filterCount = 0 }: NavbarProps) => {
-    //const { isSignedIn } = useUser();
-    const { isSignedIn } = useFetchEnvUser();
     const pathname = usePathname();
+    const { instance, accounts } = useMsal();
+    const isSignedIn = accounts.length > 0;
 
     const isDashboardPage = pathname === "/dashboard" && isSignedIn;
     const isBoardsPage = pathname.includes("/boards/") && isSignedIn;
+
+    const handleSignInRedirect = () => {
+        instance
+            .loginRedirect(loginRequest)
+            .catch((error) => console.error("Login redirect error:", error));
+    }
+
+    const handleSignOutRedirect = () => {
+        document.cookie = 'msal.session=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=Lax';
+        instance
+            .logoutRedirect()
+            .catch((error) => console.error("Logout redirect error:", error));
+    }
 
     if (isDashboardPage) {
         return (
@@ -30,10 +44,11 @@ export const Navbar = ({ boardTitle, setIsEditingTitle, onFilterClick, filterCou
                         <SquareKanban className="h-5 w-5 sm:h-7 sm:w-7 text-purple-600" />
                         <span className="text-lg sm:text-xl font-bold text-gray-800">Taskman</span>
                     </Link>
-
-                    <div className="flex items-center gap-2 sm:gap-3">
-                        <UserButton userProfileMode="navigation" userProfileUrl="/user-profile" />
-                    </div>
+                    <AuthenticatedTemplate>
+                        <Button variant="ghost" size="sm" className="text-xs sm:text-sm" onClick={handleSignOutRedirect}>
+                            Sign Out
+                        </Button>
+                    </AuthenticatedTemplate>
                 </div>
             </header>
         );
@@ -54,29 +69,29 @@ export const Navbar = ({ boardTitle, setIsEditingTitle, onFilterClick, filterCou
                     </div>
 
                     <div className="flex items-center gap-2 sm:gap-3">
-                        {
-                            // onFilterClick && (
-                            <Button
-                                size="sm"
-                                onClick={onFilterClick}
-                                className={`text-xs sm:text-sm 
+                        <Button
+                            size="sm"
+                            onClick={onFilterClick}
+                            className={`text-xs sm:text-sm 
                                     ${filterCount > 0
-                                        ? "bg-purple-200 text-purple-700 hover:bg-purple-300"
-                                        : "nav-btn-style"
-                                    }`
-                                }
-                            >
-                                <Filter className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
-                                <span className="hidden sm:inline">Filter</span>
-                                {
-                                    filterCount > 0 && (
-                                        <Badge variant="secondary" className="ml-1 sm:ml-2 text-purple-700 p-1.5 text-2xs sm:text-xs">{filterCount}</Badge>
-                                    )
-                                }
+                                    ? "bg-purple-200 text-purple-700 hover:bg-purple-300"
+                                    : "nav-btn-style"
+                                }`
+                            }
+                        >
+                            <Filter className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
+                            <span className="hidden sm:inline">Filter</span>
+                            {
+                                filterCount > 0 && (
+                                    <Badge variant="secondary" className="ml-1 sm:ml-2 text-purple-700 p-1.5 text-2xs sm:text-xs">{filterCount}</Badge>
+                                )
+                            }
+                        </Button>
+                        <AuthenticatedTemplate>
+                            <Button variant="ghost" size="sm" className="text-xs sm:text-sm" onClick={handleSignOutRedirect}>
+                                Sign Out
                             </Button>
-                            //)
-                        }
-                        <UserButton userProfileMode="navigation" userProfileUrl="/user-profile" />
+                        </AuthenticatedTemplate>
                     </div>
                 </div>
             </header>
@@ -101,21 +116,20 @@ export const Navbar = ({ boardTitle, setIsEditingTitle, onFilterClick, filterCou
                                             Go To Dashboard
                                         </Button>
                                     </Link>
-                                    <UserButton userProfileMode="navigation" userProfileUrl="/user-profile" />
+                                    <AuthenticatedTemplate>
+                                        <Button variant="ghost" size="sm" className="text-xs sm:text-sm" onClick={handleSignOutRedirect}>
+                                            Sign Out
+                                        </Button>
+                                    </AuthenticatedTemplate>
                                 </>
                             )
                             : (
                                 <>
-                                    <SignInButton>
-                                        <Button variant="ghost" size="sm" className="text-xs sm:text-sm">
+                                    <UnauthenticatedTemplate>
+                                        <Button variant="ghost" size="sm" className="text-xs sm:text-sm" onClick={handleSignInRedirect}>
                                             Sign In
                                         </Button>
-                                    </SignInButton>
-                                    <SignUpButton>
-                                        <Button size="sm" className="nav-btn-style text-xs sm:text-sm">
-                                            Sign Up
-                                        </Button>
-                                    </SignUpButton>
+                                    </UnauthenticatedTemplate>
                                 </>
                             )
                     }

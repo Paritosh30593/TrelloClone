@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System;
+using TC.Application.ServiceContracts;
+using TC.WebAPI.Services;
 
 namespace TC.WebAPI.StartupExtensions
 {
@@ -26,6 +28,9 @@ namespace TC.WebAPI.StartupExtensions
 
             services.ConfigureInfrastructureServices(builder.Configuration);
             services.ConfigureApplicationServices(builder.Configuration);
+            services.AddHttpContextAccessor();
+
+            services.AddScoped<IClaimService, ClaimService>();
 
             services.AddControllers();
             services.AddOpenApi();

@@ -4,6 +4,24 @@
  */
 
 import { LogLevel, Configuration } from "@azure/msal-browser";
+import "client-only";
+
+const normalizeOrigin = (value?: string) => {
+    if (!value) return undefined;
+
+    const trimmed = value.trim();
+    if (!trimmed) return undefined;
+
+    // Ensure we only accept absolute http(s) origins for MSAL redirect URLs.
+    if (!/^https?:\/\//i.test(trimmed)) return undefined;
+
+    return trimmed.replace(/\/+$/, "");
+};
+
+const appOrigin =
+    normalizeOrigin(process.env.NEXT_PUBLIC_HOST) ??
+    (typeof window !== "undefined" ? window.location.origin : "http://localhost:3000");
+
 
 /**
  * Configuration object to be passed to MSAL instance on creation.
@@ -12,14 +30,16 @@ import { LogLevel, Configuration } from "@azure/msal-browser";
  */
 export const msalConfig: Configuration = {
     auth: {
-        clientId: process.env.CLIENT_ID ?? "",
+        clientId: process.env.NEXT_PUBLIC_CLIENT_ID ?? "",
         authority: "https://login.microsoftonline.com/organizations/v2.0",
-        redirectUri: process.env.HOST,
-        postLogoutRedirectUri: process.env.HOST
+        redirectUri: `${appOrigin}/signin-oidc`,
+        postLogoutRedirectUri: appOrigin
     },
     cache: {
-        cacheLocation: 'sessionStorage', // This configures where your cache will be stored
-        cacheRetentionDays: 1, // Set this to "true" if you are having issues on IE11 or Edge
+        // Persist auth cache across browser restarts.
+        cacheLocation: 'localStorage',
+        // Keep migrated legacy cache entries for 1 day before cleanup.
+        cacheRetentionDays: 1,
     },
     system: {
         loggerOptions: {
@@ -61,7 +81,7 @@ export const protectedResources = {
     api: {
         endpoint: process.env.NEXT_PUBLIC_API_BASE_URL,
         scopes: [
-            `api://${process.env.AUTH_APP_ID}/trello_clone.all`
+            `api://${process.env.NEXT_PUBLIC_AUTH_APP_ID}/trello_clone.all`
         ]
     }
 };
@@ -73,6 +93,6 @@ export const protectedResources = {
  * https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-permissions-and-consent#openid-connect-scopes
  */
 export const loginRequest = {
-    scopes: protectedResources.api.scopes
-
+    scopes: protectedResources.api.scopes,
+    redirectUri: `${appOrigin}/signin-oidc`
 };
